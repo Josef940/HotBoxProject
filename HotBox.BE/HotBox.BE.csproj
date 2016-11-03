@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E898AEE4-93E9-4723-87E4-4466A02BA877}</ProjectGuid>
+    <ProjectGuid>{8C6A0DC0-7F3A-4B39-897C-D8F604E0DEF0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HotBox.BLL</RootNamespace>
-    <AssemblyName>HotBox.BLL</AssemblyName>
+    <RootNamespace>HotBox.BE</RootNamespace>
+    <AssemblyName>HotBox.BE</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -32,6 +32,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,22 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Facade.cs" />
-    <Compile Include="HttpGateway.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\HotBox.BE\HotBox.BE.csproj">
-      <Project>{8c6a0dc0-7f3a-4b39-897c-d8f604e0def0}</Project>
-      <Name>HotBox.BE</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\HotBox.DAL\HotBox.DAL.csproj">
-      <Project>{c64170fb-5540-414b-b1f9-f59665956c3b}</Project>
-      <Name>HotBox.DAL</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Unit Tests\" />
+    <Compile Include="TrendProject.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

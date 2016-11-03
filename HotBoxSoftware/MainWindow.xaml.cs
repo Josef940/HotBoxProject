@@ -12,7 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using HotBox.BLL;
+using HotBox.BE;
 namespace HotBoxSoftware
 {
     /// <summary>
@@ -20,9 +21,12 @@ namespace HotBoxSoftware
     /// </summary>
     public partial class MainWindow : Window
     {
+        HttpGateway hbll = new HttpGateway();
         public MainWindow()
         {
             InitializeComponent();
+            TrendProject data = hbll.GetHotBoxData();
+            Console.Write("Something, something");
         }
     }
 }
