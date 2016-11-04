@@ -10,8 +10,14 @@ namespace HotBox.BLL
     public class HttpGateway
     {
         Facade facade = Facade.Instance;
+        TrendProject hotboxdata = null;
         public TrendProject GetHotBoxData() {
-            return facade.GetDALHttpGateway().GetHotBoxData();
+            hotboxdata = facade.GetDALHttpGateway().GetHotBoxData();
+            return hotboxdata;
+        }
+
+        public List<Module> getModules(TrendProject hbdata){
+            return hbdata.Site.Lan.Device.Modules;
         }
     }
 }

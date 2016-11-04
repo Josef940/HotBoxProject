@@ -27,6 +27,7 @@ namespace HotBox.BLL
                 return instance;
             }
         }
+
         private DAL.HttpGateway DALHttpGateway;
         public DAL.HttpGateway GetDALHttpGateway()
         {

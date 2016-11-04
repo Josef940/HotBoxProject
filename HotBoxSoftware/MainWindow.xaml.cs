@@ -26,7 +26,13 @@ namespace HotBoxSoftware
         {
             InitializeComponent();
             TrendProject data = hbll.GetHotBoxData();
-            Console.Write("Something, something");
+            Button randomButton = new Button();
+            randomButton.Height = 30;
+            randomButton.Width = 60;
+            randomButton.Content = "This is a button :D";
+            mainGrid.Children.Add(randomButton);
+
+            for(hbll.)
         }
     }
 }
