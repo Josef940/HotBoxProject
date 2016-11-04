@@ -31,8 +31,7 @@ namespace HotBoxSoftware
             randomButton.Width = 60;
             randomButton.Content = "This is a button :D";
             mainGrid.Children.Add(randomButton);
-
-            for(hbll.)
+            
         }
     }
 }
