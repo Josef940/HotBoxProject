@@ -1,0 +1,80 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Runtime.Serialization;
+using System.Xml.Serialization;
+using System.ServiceModel;
+
+namespace HotBox.BLL.Business_Entities
+{
+    
+    public class TrendProject
+    {
+        public Site Site { get; set; }
+    }
+    public class Site
+    {
+        [XmlAttribute]
+        public int CncAddress { get; set; }
+        [XmlAttribute]
+        public string TuaString { get; set; }
+        public Lan Lan { get; set; }
+    }
+
+    public class Lan
+    {
+        bool IsLocalToBoolean;
+        [XmlAttribute]
+        public string IsLocalString { get; set; }
+        [XmlAttribute]
+        public int LanNumber { get; set; }
+        public Device Device { get; set; }
+    }
+
+    public class Device
+    {
+        [XmlAttribute]
+        public int DeviceNumver { get; set; }
+        [XmlAttribute]
+        public string VersionString { get; set; }
+        public DeviceOverview DeviceOverview { get; set; }
+        [XmlElement("Module")]
+        public List<Module> Modules { get; set; }
+    }
+
+    public class DeviceOverview
+    {
+        [XmlAttribute]
+        public string DeviceType { get; set; }
+        [XmlAttribute]
+        public int MajorVersion { get; set; }
+        [XmlAttribute]
+        public int MinorVersion { get; set; }
+        [XmlAttribute]
+        public string HexEncoded { get; set; }
+        [XmlAttribute]
+        public int Revision { get; set; }
+    }
+
+    public class Module
+    {
+        [XmlAttribute]
+        public string Name { get; set; }
+        [XmlAttribute]
+        public int SubTypeNumber { get; set; }
+        [XmlElement("Param")]
+        public List<Param> Params { get; set; }
+    }
+
+    public class Param
+    {
+        [XmlAttribute]
+        public string Name { get; set; }
+        [XmlAttribute]
+        public int Type { get; set; }
+        [XmlAttribute]
+        public string Value { get; set; }
+    }
+}

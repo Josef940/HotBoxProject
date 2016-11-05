@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotBox.BLL
+namespace HotBox.BLL.Business_Logic
 {
     public class Facade
     {
         /// <summary>
         /// Facade classes returns instances of certain classes if they already exist.
         /// If not, a new instance of that class is created.
+        /// Singleton is implemented for this class.
         /// </summary>
 
         private static Facade instance;
@@ -28,6 +29,7 @@ namespace HotBox.BLL
             }
         }
 
+
         private DAL.HttpGateway DALHttpGateway;
         public DAL.HttpGateway GetDALHttpGateway()
         {
@@ -35,6 +37,24 @@ namespace HotBox.BLL
                 DALHttpGateway = new DAL.HttpGateway();
 
                 return DALHttpGateway;
+        }
+
+        private DataLogic datalogic;
+        public DataLogic GetDataLogic()
+        {
+            if (datalogic == null)
+                datalogic = new DataLogic();
+
+            return datalogic;
+        }
+
+        private DataBridge databridge;
+        public DataBridge GetDataBridge()
+        {
+            if (databridge == null)
+                databridge = new DataBridge();
+
+            return databridge;
         }
     }
 }

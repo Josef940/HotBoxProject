@@ -7,6 +7,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="500" Width="800">
     <Grid Name="mainGrid">
-        
+        <DataGrid Name="moduleDataGrid">
+            <DataGrid.Columns>
+
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

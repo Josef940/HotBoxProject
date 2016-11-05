@@ -13,7 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using HotBox.BLL;
-using HotBox.BE;
+using HotBox.BLL.Business_Entities;
+using HotBox.BLL.Business_Logic;
 namespace HotBoxSoftware
 {
     /// <summary>
@@ -21,17 +22,22 @@ namespace HotBoxSoftware
     /// </summary>
     public partial class MainWindow : Window
     {
-        HttpGateway hbll = new HttpGateway();
+        
+        Facade facade = Facade.Instance;
+        static TrendProject hotbox = null;
         public MainWindow()
         {
             InitializeComponent();
-            TrendProject data = hbll.GetHotBoxData();
-            Button randomButton = new Button();
-            randomButton.Height = 30;
-            randomButton.Width = 60;
-            randomButton.Content = "This is a button :D";
-            mainGrid.Children.Add(randomButton);
-            
+            hotbox = facade.GetDataBridge().GetHotBoxData();
+            List<Module> modules = facade.GetDataLogic().GetModules(hotbox);
+            moduleDataGrid.ItemsSource = facade.GetDataLogic().GetHotBoxValues(hotbox);
         }
+
+        public void populateDataGrid()
+        {
+
+        }
+
     }
+
 }
