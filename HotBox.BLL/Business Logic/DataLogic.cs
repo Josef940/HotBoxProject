@@ -11,7 +11,7 @@ namespace HotBox.BLL.Business_Logic
 {
     public class DataLogic
     {
-        
+        Facade facade = Facade.Instance;
         public TrendProject GetHotBoxData()
         {
             return null;
@@ -41,6 +41,16 @@ namespace HotBox.BLL.Business_Logic
             return values;
         }
 
+        public List<HotBoxValues> AutoUpdateHotBoxValues(TrendProject hotbox)
+        {
+            List<HotBoxValues> values = new List<HotBoxValues>();
+            var getHotboxValuesTask = new Task(() => 
+            {
+                var hotboxData = facade.GetDataBridge().GetHotBoxData();
+                values = GetHotBoxValues(hotboxData);
+            });
+            return null;
+        }
 
         // Serializes an XML HttpResponse response to a HotBox object if successful
         public TrendProject XMLSerializeToHotbox(HttpResponseMessage response)

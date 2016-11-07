@@ -25,15 +25,18 @@ namespace HotBoxSoftware
         
         Facade facade = Facade.Instance;
         static TrendProject hotbox = null;
+        List<HotBoxValues> hotboxValues = null;
         public MainWindow()
         {
             InitializeComponent();
             hotbox = facade.GetDataBridge().GetHotBoxData();
-            List<Module> modules = facade.GetDataLogic().GetModules(hotbox);
-            moduleDataGrid.ItemsSource = facade.GetDataLogic().GetHotBoxValues(hotbox);
+            var modules = facade.GetDataLogic().GetModules(hotbox);
+            hotboxValues = facade.GetDataLogic().GetHotBoxValues(hotbox);
+            moduleDataGrid.ItemsSource = hotboxValues;
+
         }
 
-        public void populateDataGrid()
+        public void UpdateDataGrid()
         {
 
         }
