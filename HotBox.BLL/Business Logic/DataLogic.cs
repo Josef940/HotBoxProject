@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
@@ -32,7 +33,7 @@ namespace HotBox.BLL.Business_Logic
             {
                     values.Add(new HotBoxValues()
                     {
-                        Label =item.Params[2].Value,
+                        Label = item.Params[2].Value,
                         Value = Convert.ToDouble(item.Params[0].Value),
                         Unit = item.Params[1].Value
                     });
@@ -41,15 +42,23 @@ namespace HotBox.BLL.Business_Logic
             return values;
         }
 
-        public List<HotBoxValues> AutoUpdateHotBoxValues(TrendProject hotbox)
+        public List<HotBoxValues> AutoUpdateHotBoxValues(int secondsToSleep)
         {
             List<HotBoxValues> values = new List<HotBoxValues>();
-            var getHotboxValuesTask = new Task(() => 
-            {
+                Thread.Sleep(secondsToSleep*1000);
                 var hotboxData = facade.GetDataBridge().GetHotBoxData();
                 values = GetHotBoxValues(hotboxData);
-            });
-            return null;
+            return values;
+        }
+
+        public void SetValueDifference(ref List<HotBoxValues> oldValues, List<HotBoxValues> newValues)
+        {
+            var newValuesCount = 0;
+            foreach (HotBoxValues item in oldValues)
+            {
+                item.valueDifference = newValues[newValuesCount].Value-item.Value;
+                newValuesCount++;
+            }
         }
 
         // Serializes an XML HttpResponse response to a HotBox object if successful
