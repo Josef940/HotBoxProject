@@ -13,20 +13,20 @@ namespace HotBox.BLL.Business_Logic
     public class DataLogic
     {
         Facade facade = Facade.Instance;
-        public TrendProject GetHotBoxData()
+        public Hotbox GetHotBoxData()
         {
             return null;
         }
 
         // Returns the Module List<> of a HotBox object
-        public List<Module> GetModules(TrendProject hbdata)
+        public List<Module> GetModules(Hotbox hbdata)
         {
             return hbdata.Site.Lan.Device.Modules;
         }
 
         // Values in the Params list are converted to a HotBoxValues List
         // for easier access and front-end implementation.
-        public List<HotBoxValues> GetHotBoxValues(TrendProject hotbox)
+        public List<HotBoxValues> GetHotBoxValues(Hotbox hotbox)
         {
             List<HotBoxValues> values = new List<HotBoxValues>();
             foreach (Module item in GetModules(hotbox))
@@ -62,12 +62,12 @@ namespace HotBox.BLL.Business_Logic
         }
 
         // Serializes an XML HttpResponse response to a HotBox object if successful
-        public TrendProject XMLSerializeToHotbox(HttpResponseMessage response)
+        public Hotbox XMLSerializeToHotbox(HttpResponseMessage response)
         {
             try {
-                XmlSerializer serializer = new XmlSerializer(typeof(TrendProject));
+                XmlSerializer serializer = new XmlSerializer(typeof(Hotbox));
                 var serializedhotbox = serializer.Deserialize(response.Content.ReadAsStreamAsync().Result);
-                TrendProject hotbox = (TrendProject)serializedhotbox;
+                Hotbox hotbox = (Hotbox)serializedhotbox;
                 return hotbox;
             }
             catch { return null; }

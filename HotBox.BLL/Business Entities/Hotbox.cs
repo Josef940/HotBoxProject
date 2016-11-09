@@ -9,8 +9,8 @@ using System.ServiceModel;
 
 namespace HotBox.BLL.Business_Entities
 {
-    
-    public class TrendProject
+    [XmlRoot(ElementName ="TrendProject")]
+    public class Hotbox
     {
         public Site Site { get; set; }
     }

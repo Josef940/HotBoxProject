@@ -16,6 +16,7 @@ using HotBox.BLL;
 using HotBox.BLL.Business_Entities;
 using HotBox.BLL.Business_Logic;
 using System.Threading;
+using System.Windows.Threading;
 
 namespace HotBoxSoftware
 {
@@ -26,7 +27,7 @@ namespace HotBoxSoftware
     {
         
         Facade facade = Facade.Instance;
-        static TrendProject hotbox = null;
+        static Hotbox hotbox = null;
         List<HotBoxValues> hotboxValues = null;
 
         public static DataGrid mDataGrid;
@@ -46,24 +47,25 @@ namespace HotBoxSoftware
         {
             while (true)
             {
-                Thread.Sleep(15000);
+                Thread.Sleep(TimeSpan.FromSeconds(15));
                 var newHotboxValues = new List<HotBoxValues>();
                 newHotboxValues = facade.GetDataLogic().AutoUpdateHotBoxValues(5);
                 if (newHotboxValues != null)
                 {
                     facade.GetDataLogic().SetValueDifference(ref hotboxValues, newHotboxValues);
+                    Dispatcher.BeginInvoke(DispatcherPriority.Normal,
+                        (ThreadStart)delegate()
+                        {
+                        moduleDataGrid.Items.Refresh();
+                    });
                 }
-                MessageBox.Show("Values updated");
             }
         }
 
         public void RefreshDataGrid(){
             moduleDataGrid.Items.Refresh();
         }
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            moduleDataGrid.Items.Refresh();
-        }
+
     }
 
 }

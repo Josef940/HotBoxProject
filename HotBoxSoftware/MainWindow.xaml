@@ -9,8 +9,5 @@
     <Grid Name="mainGrid">
         <DataGrid Name="moduleDataGrid" IsReadOnly="True" FontSize="16">
         </DataGrid>
-        <Button Click="Button_Click" VerticalAlignment="Center" HorizontalAlignment="Center">
-            Update values
-        </Button>
     </Grid>
 </Window>
