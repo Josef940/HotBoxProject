@@ -42,12 +42,11 @@ namespace HotBox.BLL.Business_Logic
             return values;
         }
 
-        public List<HotBoxValues> AutoUpdateHotBoxValues(int secondsToSleep)
+        public List<HotBoxValues> UpdateHotBoxValues(ref Hotbox hotboxData)
         {
             List<HotBoxValues> values = new List<HotBoxValues>();
-                Thread.Sleep(secondsToSleep*1000);
-                var hotboxData = facade.GetDataBridge().GetHotBoxData();
-                values = GetHotBoxValues(hotboxData);
+            hotboxData = facade.GetDataBridge().GetHotBoxData();
+            values = GetHotBoxValues(hotboxData);
             return values;
         }
 

@@ -27,7 +27,7 @@ namespace HotBoxSoftware
     {
         
         Facade facade = Facade.Instance;
-        static Hotbox hotbox = null;
+        Hotbox hotbox = null;
         List<HotBoxValues> hotboxValues = null;
 
         public static DataGrid mDataGrid;
@@ -49,7 +49,7 @@ namespace HotBoxSoftware
             {
                 Thread.Sleep(TimeSpan.FromSeconds(15));
                 var newHotboxValues = new List<HotBoxValues>();
-                newHotboxValues = facade.GetDataLogic().AutoUpdateHotBoxValues(5);
+                newHotboxValues = facade.GetDataLogic().UpdateHotBoxValues(ref hotbox);
                 if (newHotboxValues != null)
                 {
                     facade.GetDataLogic().SetValueDifference(ref hotboxValues, newHotboxValues);
