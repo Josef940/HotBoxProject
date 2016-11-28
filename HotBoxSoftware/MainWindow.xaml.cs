@@ -66,6 +66,19 @@ namespace HotBoxSoftware
             moduleDataGrid.Items.Refresh();
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void OpenValueWindow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var vwin = new ValueWindow(moduleDataGrid.SelectedItem as HotBoxValues);
+            vwin.Show();
+        }
+
+        // TEST STUFF
+
+
     }
 
 }

@@ -31,8 +31,9 @@ namespace HotBox.BLL.Business_Logic
             List<HotBoxValues> values = new List<HotBoxValues>();
             foreach (Module item in GetModules(hotbox))
             {
-                    values.Add(new HotBoxValues()
-                    {
+                values.Add(new HotBoxValues()
+                {
+                        Module = item.Name,
                         Label = item.Params[2].Value,
                         Value = Convert.ToDouble(item.Params[0].Value),
                         Unit = item.Params[1].Value
