@@ -36,14 +36,19 @@ namespace HotBox.BLL.Business_Entities
     public class Device
     {
         [XmlAttribute]
-        public int DeviceNumver { get; set; }
+        public int DeviceNumber { get; set; }
         [XmlAttribute]
         public string VersionString { get; set; }
         public DeviceOverview DeviceOverview { get; set; }
         [XmlElement("Module")]
         public List<Module> Modules { get; set; }
+        public ServiceResponse ServiceResponse { get; set; }
     }
-
+    public class ServiceResponse
+    {
+        [XmlAttribute]
+        public string Type { get; set; }
+    }
     public class DeviceOverview
     {
         [XmlAttribute]

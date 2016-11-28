@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Business Entities\HotBoxValues.cs" />
     <Compile Include="Business Entities\Hotbox.cs" />
+    <Compile Include="Business Entities\WriteConfirmation.cs" />
     <Compile Include="Business Logic\DataLogic.cs" />
     <Compile Include="Business Logic\Facade.cs" />
     <Compile Include="Business Logic\DataBridge.cs" />

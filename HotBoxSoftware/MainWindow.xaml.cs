@@ -27,37 +27,40 @@ namespace HotBoxSoftware
     {
         
         Facade facade = Facade.Instance;
-        Hotbox hotbox = null;
         List<HotBoxValues> hotboxValues = null;
-        readonly int ERRORSECONDS = 8;
+        List<HotBoxValues> writeablehotboxValues = null;
         readonly int UPDATESECONDS = 15;
-
-        public static DataGrid mDataGrid;
+        readonly int ERRORMESSAGESECONDS = 12;
         public MainWindow()
         {
             InitializeComponent();
-            hotbox = facade.GetDataBridge().GetHotBoxData();
-            var modules = facade.GetDataLogic().GetModules(hotbox);
-            hotboxValues = facade.GetDataLogic().GetHotBoxValues(hotbox);
+            facade.GetDataLogic().UpdateHotBoxValues(ref hotboxValues, ref writeablehotboxValues);
             moduleDataGrid.ItemsSource = hotboxValues;
-            mDataGrid = moduleDataGrid;
+            DataGridwriteableModule.ItemsSource = writeablehotboxValues;
+            if(hotboxValues==null||writeablehotboxValues==null)
+                Task.Factory.StartNew(() => TextBlockErrorToVisible());
             Task.Factory.StartNew(()=>UpdateDataGrid());
             TextBlockError.Visibility = Visibility.Hidden;
-
         }
 
         public void UpdateDataGrid()
         {
+            if(hotboxValues != null && writeablehotboxValues != null)
+                InvokeDispatcher(()=> DataGridwriteableModule.Columns.RemoveAt(4));
             while (true)
             {
+                
                 Thread.Sleep(TimeSpan.FromSeconds(UPDATESECONDS));
-                var newHotboxValues = new List<HotBoxValues>();
-                newHotboxValues = facade.GetDataLogic().UpdateHotBoxValues(ref hotbox);
-                newHotboxValues = null;
-                if (newHotboxValues != null)
+                if (facade.GetDataLogic().UpdateHotBoxValues(ref hotboxValues, ref writeablehotboxValues))
                 {
-                    facade.GetDataLogic().SetValueDifference(ref hotboxValues, newHotboxValues);
-                    InvokeDispatcher(() => moduleDataGrid.Items.Refresh());
+                    InvokeDispatcher(() => {
+                        moduleDataGrid.ItemsSource = hotboxValues;
+                        moduleDataGrid.Items.Refresh();
+                        DataGridwriteableModule.ItemsSource = writeablehotboxValues;
+                        DataGridwriteableModule.Items.Refresh();
+                        DataGridwriteableModule.Columns.RemoveAt(4);
+                    });
+                    
                 }
                 else
                 {
@@ -66,11 +69,11 @@ namespace HotBoxSoftware
             }
         }
 
-        // Sets the error message to visible for 'ERRORSECONDS' seconds
+        // Sets the error message to visible until next update
         public void TextBlockErrorToVisible()
         {
             InvokeDispatcher(() => TextBlockError.Visibility = Visibility.Visible);
-            Thread.Sleep(TimeSpan.FromSeconds(ERRORSECONDS));
+            Thread.Sleep(TimeSpan.FromSeconds(ERRORMESSAGESECONDS));
             InvokeDispatcher(()=> TextBlockError.Visibility = Visibility.Hidden);
         }
 
@@ -95,13 +98,9 @@ namespace HotBoxSoftware
 
         private void OpenValueWindow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var vwin = new ValueWindow(moduleDataGrid.SelectedItem as HotBoxValues);
+            var vwin = new ValueWindow(DataGridwriteableModule.SelectedItem as HotBoxValues);
             vwin.Show();
         }
-
-        // TEST STUFF
-
-
     }
 
 }

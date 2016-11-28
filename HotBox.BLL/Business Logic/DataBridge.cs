@@ -22,6 +22,13 @@ namespace HotBox.BLL.Business_Logic
             return hotboxdata;
         }
 
+        public Hotbox GetWriteableHotBoxData()
+        {
+            var hotboxxml = facade.GetDALHttpGateway().GetWriteableHotBoxXML();
+            Hotbox hotboxdata = facade.GetDataLogic().XMLSerializeToHotbox(hotboxxml);
+            return hotboxdata;
+        }
+
 
         // METHOD TO USE WHILE DEVELOPING, DELETE ON DEPLOYMENT
 
@@ -35,11 +42,20 @@ namespace HotBox.BLL.Business_Logic
         //}
         //---------------------------------------------------------------------------------------
 
-        public string PostHotBoxValue(string modulename, string value)
+        public bool PostHotBoxValue(string modulename, string value)
         {
-            string response;
-
-            return "";
+            value = value.Replace(",",".");
+            var hotboxxml = facade.GetDALHttpGateway().PostHotBoxValue(modulename,value);
+            Hotbox hotboxdata = facade.GetDataLogic().XMLSerializeToHotbox(hotboxxml);
+            try{
+                if (hotboxdata != null && hotboxdata.Site.Lan.Device.ServiceResponse.Type == "Acknowledge - Write was OK")
+                    return true;
+                else
+                    return false;
+            }
+            catch{
+                return false;
+            }
         }
 
     }
