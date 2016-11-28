@@ -7,8 +7,21 @@
         mc:Ignorable="d"
         Title="ValueWindow" Height="300" Width="300">
     <Grid>
-        <TextBox Name="text" HorizontalAlignment="Center" VerticalAlignment="Center">
-            asdf
-        </TextBox>
+        <StackPanel>
+            <TextBlock Name="TextBlockModuleName" HorizontalAlignment="Center" Margin="20" FontSize="22">
+                asdf
+            </TextBlock>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,30">
+                <TextBox Name="TextBoxValue" HorizontalAlignment="Center" Width="100" FontSize="14"  TextAlignment="Center">
+                asf,æl 
+                </TextBox>
+                <TextBlock Name="TextBlockUnit" HorizontalAlignment="Center" FontSize="14">
+                    afds
+                </TextBlock>
+            </StackPanel>
+            <Button HorizontalAlignment="Center" Height="30" Width="100" FontSize="14" FontWeight="Bold">
+                Apply change
+            </Button>
+        </StackPanel>
     </Grid>
 </Window>

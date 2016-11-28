@@ -15,10 +15,10 @@ namespace HotBox.BLL.Business_Logic
         Facade facade = Facade.Instance;
 
         // Returns the data from a HotBox Http (XML) response
-        //public TrendProject GetHotBoxData()
+        //public Hotbox GetHotBoxData()
         //{
         //    var hotboxxml = facade.GetDALHttpGateway().GetHotBoxXML();
-        //    TrendProject hotboxdata = facade.GetDataLogic().XMLSerializeToHotbox(hotboxxml);
+        //    Hotbox hotboxdata = facade.GetDataLogic().XMLSerializeToHotbox(hotboxxml);
         //    return hotboxdata;
         //}
 
@@ -35,6 +35,12 @@ namespace HotBox.BLL.Business_Logic
         }
         //---------------------------------------------------------------------------------------
 
+        public string PostHotBoxValue(string modulename, string value)
+        {
+            string response;
+
+            return "";
+        }
 
     }
 }

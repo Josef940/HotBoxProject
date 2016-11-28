@@ -10,7 +10,12 @@ namespace HotBox.DAL
 {
     public class HttpGateway
     {
-        private string HotBoxURI = "http://norrelundparken.se-bb.dk/ws/tsite.xml?Type=Read&Key=ABCDEF&Request=S100-200(V,%25,$)";
+        private string Key = "FF3F390D";
+        private string HotBoxReadURI = "http://norrelundparken.se-bb.dk/ws/tsite.xml?Type=Read&Key=ABCDEF&Request=S100-200(V,%25,$)";
+
+        private string HotBoxWriteURI(string modulename, string value) {
+            return "http://10.176.131.250/ws/tsite.xml?Type=Write&Key=FF3F390D&Request="+modulename+"(V="+value+")";
+        }
         /*public TrendProject GetHotBoxData() {
             using (var client = new HttpClient())
             {
@@ -38,10 +43,24 @@ namespace HotBox.DAL
             {
                 try {
                     HttpResponseMessage response =
-                        client.GetAsync(HotBoxURI).Result;
+                        client.GetAsync(HotBoxReadURI).Result;
                     return response;
                 }
                 catch{ return null;}
+            }
+        }
+
+        public HttpResponseMessage PostHotBoxValue(string modulename, string value)
+        {
+            using (var client = new HttpClient())
+            {
+                try
+                {
+                    HttpResponseMessage response = 
+                        client.GetAsync(HotBoxWriteURI(modulename,value)).Result;
+                    return response;
+                }
+                catch { return null; }
             }
         }
 

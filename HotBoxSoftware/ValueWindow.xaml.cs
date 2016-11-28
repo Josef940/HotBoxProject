@@ -23,7 +23,8 @@ namespace HotBoxSoftware
         public ValueWindow(HotBoxValues hotboxvalues)
         {
             InitializeComponent();
-            text.Text = hotboxvalues.Label;
+            TextBlockModuleName.Text = hotboxvalues.Label;
+            TextBlockUnit.Text = hotboxvalues.Unit;
         }
     }
 }
