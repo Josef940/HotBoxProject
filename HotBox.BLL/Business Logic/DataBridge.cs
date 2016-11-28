@@ -14,25 +14,25 @@ namespace HotBox.BLL.Business_Logic
     {
         Facade facade = Facade.Instance;
 
-        // Returns the data from a HotBox Http (XML) response
-        //public Hotbox GetHotBoxData()
-        //{
-        //    var hotboxxml = facade.GetDALHttpGateway().GetHotBoxXML();
-        //    Hotbox hotboxdata = facade.GetDataLogic().XMLSerializeToHotbox(hotboxxml);
-        //    return hotboxdata;
-        //}
+        //Returns the data from a HotBox Http(XML) response
+        public Hotbox GetHotBoxData()
+        {
+            var hotboxxml = facade.GetDALHttpGateway().GetHotBoxXML();
+            Hotbox hotboxdata = facade.GetDataLogic().XMLSerializeToHotbox(hotboxxml);
+            return hotboxdata;
+        }
 
 
         // METHOD TO USE WHILE DEVELOPING, DELETE ON DEPLOYMENT
 
-        public Hotbox GetHotBoxData()
-        {
-            string XMLString = Properties.Resources.XMLString;
-            HttpResponseMessage responsexml = new HttpResponseMessage();
-            responsexml.Content = new StringContent(XMLString);
-            Hotbox hotboxdata = facade.GetDataLogic().XMLSerializeToHotbox(responsexml);
-            return hotboxdata;
-        }
+        //public Hotbox GetHotBoxData()
+        //{
+        //    string XMLString = Properties.Resources.XMLString;
+        //    HttpResponseMessage responsexml = new HttpResponseMessage();
+        //    responsexml.Content = new StringContent(XMLString);
+        //    Hotbox hotboxdata = facade.GetDataLogic().XMLSerializeToHotbox(responsexml);
+        //    return hotboxdata;
+        //}
         //---------------------------------------------------------------------------------------
 
         public string PostHotBoxValue(string modulename, string value)

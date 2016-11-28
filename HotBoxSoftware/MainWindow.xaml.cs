@@ -29,6 +29,8 @@ namespace HotBoxSoftware
         Facade facade = Facade.Instance;
         Hotbox hotbox = null;
         List<HotBoxValues> hotboxValues = null;
+        readonly int ERRORSECONDS = 8;
+        readonly int UPDATESECONDS = 15;
 
         public static DataGrid mDataGrid;
         public MainWindow()
@@ -40,6 +42,7 @@ namespace HotBoxSoftware
             moduleDataGrid.ItemsSource = hotboxValues;
             mDataGrid = moduleDataGrid;
             Task.Factory.StartNew(()=>UpdateDataGrid());
+            TextBlockError.Visibility = Visibility.Hidden;
 
         }
 
@@ -47,19 +50,39 @@ namespace HotBoxSoftware
         {
             while (true)
             {
-                Thread.Sleep(TimeSpan.FromSeconds(15));
+                Thread.Sleep(TimeSpan.FromSeconds(UPDATESECONDS));
                 var newHotboxValues = new List<HotBoxValues>();
                 newHotboxValues = facade.GetDataLogic().UpdateHotBoxValues(ref hotbox);
+                newHotboxValues = null;
                 if (newHotboxValues != null)
                 {
                     facade.GetDataLogic().SetValueDifference(ref hotboxValues, newHotboxValues);
-                    Dispatcher.BeginInvoke(DispatcherPriority.Normal,
-                        (ThreadStart)delegate()
-                        {
-                        moduleDataGrid.Items.Refresh();
-                    });
+                    InvokeDispatcher(() => moduleDataGrid.Items.Refresh());
+                }
+                else
+                {
+                    Task.Factory.StartNew(()=>TextBlockErrorToVisible());
                 }
             }
+        }
+
+        // Sets the error message to visible for 'ERRORSECONDS' seconds
+        public void TextBlockErrorToVisible()
+        {
+            InvokeDispatcher(() => TextBlockError.Visibility = Visibility.Visible);
+            Thread.Sleep(TimeSpan.FromSeconds(ERRORSECONDS));
+            InvokeDispatcher(()=> TextBlockError.Visibility = Visibility.Hidden);
+        }
+
+        // Invokes the dispatcher object to access GUI elements from another thread than the main thread
+        // Code should be passed to the parameter by using a lambda expression
+        public void InvokeDispatcher(Action codetoexecute)
+        {
+            Dispatcher.BeginInvoke(DispatcherPriority.Normal,
+                (ThreadStart)delegate ()
+                {
+                    codetoexecute();
+                });
         }
 
         public void RefreshDataGrid(){

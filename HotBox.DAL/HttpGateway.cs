@@ -12,6 +12,7 @@ namespace HotBox.DAL
     {
         private string Key = "FF3F390D";
         private string HotBoxReadURI = "http://norrelundparken.se-bb.dk/ws/tsite.xml?Type=Read&Key=ABCDEF&Request=S100-200(V,%25,$)";
+        //private string HotBoxReadURI = "http://10.176.131.250/ws/tsite.xml?Type=Write&Request=K6(V,%25,$)";
 
         private string HotBoxWriteURI(string modulename, string value) {
             return "http://10.176.131.250/ws/tsite.xml?Type=Write&Key=FF3F390D&Request="+modulename+"(V="+value+")";

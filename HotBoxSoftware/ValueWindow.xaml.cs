@@ -26,5 +26,10 @@ namespace HotBoxSoftware
             TextBlockModuleName.Text = hotboxvalues.Label;
             TextBlockUnit.Text = hotboxvalues.Unit;
         }
+
+        private void Apply_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

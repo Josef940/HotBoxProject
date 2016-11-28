@@ -19,7 +19,7 @@
                     afds
                 </TextBlock>
             </StackPanel>
-            <Button HorizontalAlignment="Center" Height="30" Width="100" FontSize="14" FontWeight="Bold">
+            <Button HorizontalAlignment="Center" Height="30" Width="100" FontSize="14" FontWeight="Bold" Click="Apply_Click">
                 Apply change
             </Button>
         </StackPanel>
