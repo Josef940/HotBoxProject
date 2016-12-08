@@ -92,8 +92,11 @@ namespace HotBox.BLL.Business_Logic
             int newValuesCount = 0;
             foreach (var item in oldValues)
             {
-                newValues[newValuesCount].valueDifference = newValues[newValuesCount].Value - item.Value;
-                newValuesCount++;
+                if (item.Module == newValues[newValuesCount].Module)
+                {
+                    newValues[newValuesCount].valueDifference = newValues[newValuesCount].Value - item.Value;
+                    newValuesCount++;
+                }
             }
             return newValues;
         }

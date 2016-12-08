@@ -6,8 +6,9 @@
         xmlns:local="clr-namespace:HotBoxSoftware"
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="1300">
+    <Viewbox>
     <DockPanel Name="mainGrid">
-        <TextBlock Name="TextBlockError" Foreground="Red" Margin="10" FontWeight="Bold" FontSize="14">
+        <TextBlock Name="TextBlockError" Foreground="Red" Margin="10" FontWeight="Bold" FontSize="16">
             Error updating values!
         </TextBlock>
         <DataGrid Name="moduleDataGrid" IsReadOnly="True" FontSize="16">
@@ -15,4 +16,5 @@
         <DataGrid Name="DataGridwriteableModule" IsReadOnly="True" FontSize="16" MouseDoubleClick="OpenValueWindow_MouseDoubleClick">
         </DataGrid>
     </DockPanel>
+    </Viewbox>
 </Window>

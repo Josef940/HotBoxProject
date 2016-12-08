@@ -30,7 +30,7 @@ namespace HotBox.BLL.Business_Logic
         }
 
 
-        private DAL.HttpGateway DALHttpGateway;
+        private static DAL.HttpGateway DALHttpGateway;
         public DAL.HttpGateway GetDALHttpGateway()
         {
             if (DALHttpGateway == null)
@@ -39,7 +39,7 @@ namespace HotBox.BLL.Business_Logic
                 return DALHttpGateway;
         }
 
-        private DataLogic datalogic;
+        private static DataLogic datalogic;
         public DataLogic GetDataLogic()
         {
             if (datalogic == null)
@@ -48,7 +48,7 @@ namespace HotBox.BLL.Business_Logic
             return datalogic;
         }
 
-        private DataBridge databridge;
+        private static DataBridge databridge;
         public DataBridge GetDataBridge()
         {
             if (databridge == null)

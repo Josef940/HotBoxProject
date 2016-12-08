@@ -25,7 +25,7 @@ namespace HotBoxSoftware
     /// </summary>
     public partial class MainWindow : Window
     {
-        
+
         Facade facade = Facade.Instance;
         List<HotBoxValues> hotboxValues = null;
         List<HotBoxValues> writeablehotboxValues = null;
@@ -37,34 +37,35 @@ namespace HotBoxSoftware
             facade.GetDataLogic().UpdateHotBoxValues(ref hotboxValues, ref writeablehotboxValues);
             moduleDataGrid.ItemsSource = hotboxValues;
             DataGridwriteableModule.ItemsSource = writeablehotboxValues;
-            if(hotboxValues==null||writeablehotboxValues==null)
+            if (hotboxValues == null || writeablehotboxValues == null)
                 Task.Factory.StartNew(() => TextBlockErrorToVisible());
-            Task.Factory.StartNew(()=>UpdateDataGrid());
+            Task.Factory.StartNew(() => UpdateDataGrid());
             TextBlockError.Visibility = Visibility.Hidden;
         }
 
         public void UpdateDataGrid()
         {
-            if(hotboxValues != null && writeablehotboxValues != null)
-                InvokeDispatcher(()=> DataGridwriteableModule.Columns.RemoveAt(4));
+            if (hotboxValues != null && writeablehotboxValues != null)
+                InvokeDispatcher(() => DataGridwriteableModule.Columns.RemoveAt(4));
             while (true)
             {
-                
+
                 Thread.Sleep(TimeSpan.FromSeconds(UPDATESECONDS));
                 if (facade.GetDataLogic().UpdateHotBoxValues(ref hotboxValues, ref writeablehotboxValues))
                 {
-                    InvokeDispatcher(() => {
+                    InvokeDispatcher(() =>
+                    {
                         moduleDataGrid.ItemsSource = hotboxValues;
                         moduleDataGrid.Items.Refresh();
                         DataGridwriteableModule.ItemsSource = writeablehotboxValues;
                         DataGridwriteableModule.Items.Refresh();
                         DataGridwriteableModule.Columns.RemoveAt(4);
                     });
-                    
+
                 }
                 else
                 {
-                    Task.Factory.StartNew(()=>TextBlockErrorToVisible());
+                    Task.Factory.StartNew(() => TextBlockErrorToVisible());
                 }
             }
         }
@@ -74,7 +75,7 @@ namespace HotBoxSoftware
         {
             InvokeDispatcher(() => TextBlockError.Visibility = Visibility.Visible);
             Thread.Sleep(TimeSpan.FromSeconds(ERRORMESSAGESECONDS));
-            InvokeDispatcher(()=> TextBlockError.Visibility = Visibility.Hidden);
+            InvokeDispatcher(() => TextBlockError.Visibility = Visibility.Hidden);
         }
 
         // Invokes the dispatcher object to access GUI elements from another thread than the main thread
@@ -88,7 +89,8 @@ namespace HotBoxSoftware
                 });
         }
 
-        public void RefreshDataGrid(){
+        public void RefreshDataGrid()
+        {
             moduleDataGrid.Items.Refresh();
         }
 

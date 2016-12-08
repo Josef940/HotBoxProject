@@ -15,7 +15,7 @@ namespace HotBox.DAL
         private string HotBoxReadURI = "http://10.176.131.250/ws/tsite.xml?Type=Read&Request=S1-300(V,%25,$)";
         private string WriteableHotBoxReadURI = "http://10.176.131.250/ws/tsite.xml?Type=Read&Request=K1-300(V,%25,$)";
         private string HotBoxWriteURI(string modulename, string value) {
-            return "http://10.176.131.250/ws/tsite.xml?Type=Write&Key=FF3F390D&Request="+modulename+"(V="+value+")";
+            return String.Format("http://10.176.131.250/ws/tsite.xml?Type=Write&Key=FF3F390D&Request={0}(V={1})", modulename, value);
         }
         /*public TrendProject GetHotBoxData() {
             using (var client = new HttpClient())
