@@ -45,7 +45,7 @@ namespace HotBox.BLL.Unit_Tests
             Hotbox hotboxdata = facade.GetDataLogic().XMLSerializeToHotbox(response);
             List<HotBoxValues> hbvalues = facade.GetDataLogic().GetHotBoxValues(hotboxdata);
 
-            Assert.AreEqual(19638480,hbvalues[0].Value);
+            Assert.AreEqual((double)1963848,hbvalues[0].Value);
         }
         [Test]
         public void Get_Modules_From_HotBox_Test()

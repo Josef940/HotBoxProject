@@ -6,15 +6,18 @@
         xmlns:local="clr-namespace:HotBoxSoftware"
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="1300">
-    <Viewbox>
     <DockPanel Name="mainGrid">
-        <TextBlock Name="TextBlockError" Foreground="Red" Margin="10" FontWeight="Bold" FontSize="16">
+        <StackPanel Name="mainGrid2" >
+            <TextBlock Name="TextBlockError" Foreground="Red" Margin="10" FontWeight="Bold" FontSize="16" Visibility="Hidden">
             Error updating values!
         </TextBlock>
+        <TextBlock Name="TextBlockLoading" Margin="10" FontSize="14" Visibility="Hidden">
+                Loading...
+        </TextBlock>
+            </StackPanel>
         <DataGrid Name="moduleDataGrid" IsReadOnly="True" FontSize="16">
         </DataGrid>
         <DataGrid Name="DataGridwriteableModule" IsReadOnly="True" FontSize="16" MouseDoubleClick="OpenValueWindow_MouseDoubleClick">
         </DataGrid>
     </DockPanel>
-    </Viewbox>
 </Window>

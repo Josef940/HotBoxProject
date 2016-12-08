@@ -29,57 +29,99 @@ namespace HotBoxSoftware
         Facade facade = Facade.Instance;
         List<HotBoxValues> hotboxValues = null;
         List<HotBoxValues> writeablehotboxValues = null;
-        readonly int UPDATESECONDS = 15;
+        readonly int UPDATESECONDS = 5;
         readonly int ERRORMESSAGESECONDS = 12;
         public MainWindow()
         {
             InitializeComponent();
-            facade.GetDataLogic().UpdateHotBoxValues(ref hotboxValues, ref writeablehotboxValues);
+            //TextBlockError.Visibility = Visibility.Hidden;
             moduleDataGrid.ItemsSource = hotboxValues;
             DataGridwriteableModule.ItemsSource = writeablehotboxValues;
-            if (hotboxValues == null || writeablehotboxValues == null)
-                Task.Factory.StartNew(() => TextBlockErrorToVisible());
-            Task.Factory.StartNew(() => UpdateDataGrid());
-            TextBlockError.Visibility = Visibility.Hidden;
+            //if (hotboxValues == null || writeablehotboxValues == null)
+            //    Task.Factory.StartNew(() => TextBlockErrorToVisible());
+            //Task.Factory.StartNew(() => UpdateDataGrid());
+            //Task.Factory.StartNew(()=>UpdateDataGridLoop());
+            UpdateDataGridLoop();
+        }
+        private Task TEST()
+        {
+            TextBlockLoading.Visibility = Visibility.Visible;
+            return Task.Factory.StartNew(() => UpdateDataGridLoopTEST());
         }
 
-        public void UpdateDataGrid()
+        private async void UpdateDataGridLoopTEST()
         {
-            if (hotboxValues != null && writeablehotboxValues != null)
-                InvokeDispatcher(() => DataGridwriteableModule.Columns.RemoveAt(4));
-            while (true)
+            await Task.Factory.StartNew(() => facade.GetDataLogic().UpdateHotBoxValues(ref hotboxValues, ref writeablehotboxValues))
+                .ContinueWith(r =>
+                {
+                    TextBlockLoading.Visibility = Visibility.Hidden;
+                    if (r.Result)
+                        RefreshHotBoxDataGrid();
+                    else
+                        Task.Factory.StartNew(() => TextBlockErrorToVisible());
+
+                }, TaskScheduler.FromCurrentSynchronizationContext());
+            Thread.Sleep(TimeSpan.FromSeconds(UPDATESECONDS));
+
+        }
+        private void UpdateDataGridLoop()
+        {
+            Task.Factory.StartNew(()=>
             {
-
-                Thread.Sleep(TimeSpan.FromSeconds(UPDATESECONDS));
-                if (facade.GetDataLogic().UpdateHotBoxValues(ref hotboxValues, ref writeablehotboxValues))
+                while (true)
                 {
-                    InvokeDispatcher(() =>
-                    {
-                        moduleDataGrid.ItemsSource = hotboxValues;
-                        moduleDataGrid.Items.Refresh();
-                        DataGridwriteableModule.ItemsSource = writeablehotboxValues;
-                        DataGridwriteableModule.Items.Refresh();
-                        DataGridwriteableModule.Columns.RemoveAt(4);
-                    });
+                    InvokeDispatcher(() => TextBlockLoading.Visibility = Visibility.Visible);
+                    bool updated = facade.GetDataLogic().UpdateHotBoxValues(ref hotboxValues, ref writeablehotboxValues);
+                    InvokeDispatcher(() => TextBlockLoading.Visibility = Visibility.Hidden);
 
+                    if (updated)
+                        InvokeDispatcher(() => RefreshHotBoxDataGrid());
+                    else
+                        Task.Factory.StartNew(() => TextBlockErrorToVisible());
+                    Thread.Sleep(TimeSpan.FromSeconds(UPDATESECONDS));
                 }
-                else
-                {
-                    Task.Factory.StartNew(() => TextBlockErrorToVisible());
-                }
-            }
+            });
         }
 
-        // Sets the error message to visible until next update
-        public void TextBlockErrorToVisible()
+        private void UpdateDataGridLoopd()
         {
-            InvokeDispatcher(() => TextBlockError.Visibility = Visibility.Visible);
-            Thread.Sleep(TimeSpan.FromSeconds(ERRORMESSAGESECONDS));
-            InvokeDispatcher(() => TextBlockError.Visibility = Visibility.Hidden);
+            TextBlockLoading.Visibility = Visibility.Visible;
+            Task.Factory.StartNew(() => facade.GetDataLogic().UpdateHotBoxValues(ref hotboxValues, ref writeablehotboxValues))
+                .ContinueWith(r =>
+                {
+                    TextBlockLoading.Visibility = Visibility.Hidden;
+                    if (r.Result)
+                        RefreshHotBoxDataGrid();
+                    else
+                        TextBlockErrorToVisible();
+
+                }, TaskScheduler.FromCurrentSynchronizationContext());
+            //Thread.Sleep(TimeSpan.FromSeconds(UPDATESECONDS));
         }
 
+        // Starts new thread and
+        // sets the error message to visible for ERRORMESSAGESECONDS seconds
+        public Task TextBlockErrorToVisible()
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                InvokeDispatcher(() => TextBlockError.Visibility = Visibility.Visible);
+                Thread.Sleep(TimeSpan.FromSeconds(ERRORMESSAGESECONDS));
+            })
+                .ContinueWith(_ => InvokeDispatcher(() => TextBlockError.Visibility = Visibility.Hidden));
+        }
+
+        public void RefreshHotBoxDataGrid()
+        {
+            moduleDataGrid.ItemsSource = hotboxValues;
+            moduleDataGrid.Items.Refresh();
+            DataGridwriteableModule.ItemsSource = writeablehotboxValues;
+            DataGridwriteableModule.Items.Refresh();
+            DataGridwriteableModule.Columns.RemoveAt(4);
+        }
         // Invokes the dispatcher object to access GUI elements from another thread than the main thread
         // Code should be passed to the parameter by using a lambda expression
+        // CODE REFACTORED, THIS METHOD MAY BE REDUNDANT
         public void InvokeDispatcher(Action codetoexecute)
         {
             Dispatcher.BeginInvoke(DispatcherPriority.Normal,
