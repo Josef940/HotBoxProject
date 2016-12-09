@@ -5,19 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HotBoxSoftware"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="1300">
+        Title="MainWindow" Height="Auto" 
+        Width="Auto">
+    <Viewbox StretchDirection="DownOnly">
     <DockPanel Name="mainGrid">
         <StackPanel Name="mainGrid2" >
             <TextBlock Name="TextBlockError" Foreground="Red" Margin="10" FontWeight="Bold" FontSize="16" Visibility="Hidden">
             Error updating values!
-        </TextBlock>
-        <TextBlock Name="TextBlockLoading" Margin="10" FontSize="14" Visibility="Hidden">
+            </TextBlock>
+            <TextBlock Name="TextBlockLoading" Margin="10" FontSize="14" Visibility="Hidden">
                 Loading...
-        </TextBlock>
-            </StackPanel>
-        <DataGrid Name="moduleDataGrid" IsReadOnly="True" FontSize="16">
-        </DataGrid>
-        <DataGrid Name="DataGridwriteableModule" IsReadOnly="True" FontSize="16" MouseDoubleClick="OpenValueWindow_MouseDoubleClick">
-        </DataGrid>
+            </TextBlock>
+        </StackPanel>
+        <DataGrid Name="moduleDataGrid" IsReadOnly="True" FontSize="16" AlternationCount="2" RowStyle="{StaticResource CustomRowStyle}"
+                  Style="{StaticResource CustomDataGrid}"/>
+
+        <DataGrid Name="DataGridwriteableModule" IsReadOnly="True" FontSize="16" MouseDoubleClick="OpenValueWindow_MouseDoubleClick"
+                  Style="{StaticResource CustomDataGrid}" RowStyle="{StaticResource CustomRowStyle}" AlternationCount="2"/>
+
     </DockPanel>
+    </Viewbox>
 </Window>

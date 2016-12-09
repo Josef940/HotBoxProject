@@ -34,39 +34,14 @@ namespace HotBoxSoftware
         public MainWindow()
         {
             InitializeComponent();
-            //TextBlockError.Visibility = Visibility.Hidden;
             moduleDataGrid.ItemsSource = hotboxValues;
             DataGridwriteableModule.ItemsSource = writeablehotboxValues;
-            //if (hotboxValues == null || writeablehotboxValues == null)
-            //    Task.Factory.StartNew(() => TextBlockErrorToVisible());
-            //Task.Factory.StartNew(() => UpdateDataGrid());
-            //Task.Factory.StartNew(()=>UpdateDataGridLoop());
             UpdateDataGridLoop();
         }
-        private Task TEST()
-        {
-            TextBlockLoading.Visibility = Visibility.Visible;
-            return Task.Factory.StartNew(() => UpdateDataGridLoopTEST());
-        }
 
-        private async void UpdateDataGridLoopTEST()
+        private Task UpdateDataGridLoop()
         {
-            await Task.Factory.StartNew(() => facade.GetDataLogic().UpdateHotBoxValues(ref hotboxValues, ref writeablehotboxValues))
-                .ContinueWith(r =>
-                {
-                    TextBlockLoading.Visibility = Visibility.Hidden;
-                    if (r.Result)
-                        RefreshHotBoxDataGrid();
-                    else
-                        Task.Factory.StartNew(() => TextBlockErrorToVisible());
-
-                }, TaskScheduler.FromCurrentSynchronizationContext());
-            Thread.Sleep(TimeSpan.FromSeconds(UPDATESECONDS));
-
-        }
-        private void UpdateDataGridLoop()
-        {
-            Task.Factory.StartNew(()=>
+            return Task.Factory.StartNew(()=>
             {
                 while (true)
                 {
@@ -83,25 +58,9 @@ namespace HotBoxSoftware
             });
         }
 
-        private void UpdateDataGridLoopd()
-        {
-            TextBlockLoading.Visibility = Visibility.Visible;
-            Task.Factory.StartNew(() => facade.GetDataLogic().UpdateHotBoxValues(ref hotboxValues, ref writeablehotboxValues))
-                .ContinueWith(r =>
-                {
-                    TextBlockLoading.Visibility = Visibility.Hidden;
-                    if (r.Result)
-                        RefreshHotBoxDataGrid();
-                    else
-                        TextBlockErrorToVisible();
-
-                }, TaskScheduler.FromCurrentSynchronizationContext());
-            //Thread.Sleep(TimeSpan.FromSeconds(UPDATESECONDS));
-        }
-
         // Starts new thread and
         // sets the error message to visible for ERRORMESSAGESECONDS seconds
-        public Task TextBlockErrorToVisible()
+        private Task TextBlockErrorToVisible()
         {
             return Task.Factory.StartNew(() =>
             {
@@ -111,7 +70,7 @@ namespace HotBoxSoftware
                 .ContinueWith(_ => InvokeDispatcher(() => TextBlockError.Visibility = Visibility.Hidden));
         }
 
-        public void RefreshHotBoxDataGrid()
+        private void RefreshHotBoxDataGrid()
         {
             moduleDataGrid.ItemsSource = hotboxValues;
             moduleDataGrid.Items.Refresh();
@@ -129,15 +88,6 @@ namespace HotBoxSoftware
                 {
                     codetoexecute();
                 });
-        }
-
-        public void RefreshDataGrid()
-        {
-            moduleDataGrid.Items.Refresh();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
         }
 
         private void OpenValueWindow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
