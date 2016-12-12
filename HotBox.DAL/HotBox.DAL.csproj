@@ -30,16 +30,27 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,11 +59,59 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HotboxDB\DBGetData.cs" />
+    <Compile Include="HotboxDB\HotboxData.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HotboxData.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HotboxDB\HotboxData.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HotboxData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HotboxDB\HotboxData.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HotboxData.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="HotboxDB\tblOutstation.cs">
+      <DependentUpon>HotboxData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HotboxDB\tblPointValue.cs">
+      <DependentUpon>HotboxData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HotboxDB\tblStrategy.cs">
+      <DependentUpon>HotboxData.tt</DependentUpon>
+    </Compile>
     <Compile Include="HttpGateway.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
+    <EntityDeploy Include="HotboxDB\HotboxData.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>HotboxData.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="HotboxDB\HotboxData.edmx.diagram">
+      <DependentUpon>HotboxData.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="HotboxDB\HotboxData.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HotboxData.edmx</DependentUpon>
+      <LastGenOutput>HotboxData.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="HotboxDB\HotboxData.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HotboxData.edmx</DependentUpon>
+      <LastGenOutput>HotboxData.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

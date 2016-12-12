@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HOTBOXDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblOutstation">
+          <Key>
+            <PropertyRef Name="OutstationId" />
+          </Key>
+          <Property Name="OutstationId" Type="tinyint" Nullable="false" />
+          <Property Name="OutstationHostname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="OutstationLearned" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblPointValue">
+          <Key>
+            <PropertyRef Name="theIndex" />
+            <PropertyRef Name="DataTime" />
+          </Key>
+          <Property Name="theIndex" Type="int" Nullable="false" />
+          <Property Name="DataTime" Type="datetime" Nullable="false" />
+          <Property Name="DataValue" Type="float" Nullable="false" />
+          <Property Name="Counter" Type="int" />
+        </EntityType>
+        <EntityType Name="tblStrategy">
+          <Key>
+            <PropertyRef Name="theIndex" />
+          </Key>
+          <Property Name="theIndex" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OutstationNo" Type="tinyint" Nullable="false" />
+          <Property Name="Point" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="theLabel" Type="nvarchar" MaxLength="30" />
+          <Property Name="theUnit" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <Association Name="FK_tblPointValue_tblStrategy">
+          <End Role="tblStrategy" Type="Self.tblStrategy" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblPointValue" Type="Self.tblPointValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStrategy">
+              <PropertyRef Name="theIndex" />
+            </Principal>
+            <Dependent Role="tblPointValue">
+              <PropertyRef Name="theIndex" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblStrategy_tblOutstation">
+          <End Role="tblOutstation" Type="Self.tblOutstation" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblStrategy" Type="Self.tblStrategy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblOutstation">
+              <PropertyRef Name="OutstationId" />
+            </Principal>
+            <Dependent Role="tblStrategy">
+              <PropertyRef Name="OutstationNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HOTBOXDBModelStoreContainer">
+          <EntitySet Name="tblOutstation" EntityType="Self.tblOutstation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPointValue" EntityType="Self.tblPointValue" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblStrategy" EntityType="Self.tblStrategy" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tblPointValue_tblStrategy" Association="Self.FK_tblPointValue_tblStrategy">
+            <End Role="tblStrategy" EntitySet="tblStrategy" />
+            <End Role="tblPointValue" EntitySet="tblPointValue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblStrategy_tblOutstation" Association="Self.FK_tblStrategy_tblOutstation">
+            <End Role="tblOutstation" EntitySet="tblOutstation" />
+            <End Role="tblStrategy" EntitySet="tblStrategy" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HOTBOXDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblOutstation">
+          <Key>
+            <PropertyRef Name="OutstationId" />
+          </Key>
+          <Property Name="OutstationId" Type="Byte" Nullable="false" />
+          <Property Name="OutstationHostname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OutstationLearned" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tblStrategies" Relationship="Self.FK_tblStrategy_tblOutstation" FromRole="tblOutstation" ToRole="tblStrategy" />
+        </EntityType>
+        <EntityType Name="tblPointValue">
+          <Key>
+            <PropertyRef Name="theIndex" />
+            <PropertyRef Name="DataTime" />
+          </Key>
+          <Property Name="theIndex" Type="Int32" Nullable="false" />
+          <Property Name="DataTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DataValue" Type="Double" Nullable="false" />
+          <Property Name="Counter" Type="Int32" />
+          <NavigationProperty Name="tblStrategy" Relationship="Self.FK_tblPointValue_tblStrategy" FromRole="tblPointValue" ToRole="tblStrategy" />
+        </EntityType>
+        <EntityType Name="tblStrategy">
+          <Key>
+            <PropertyRef Name="theIndex" />
+          </Key>
+          <Property Name="theIndex" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OutstationNo" Type="Byte" Nullable="false" />
+          <Property Name="Point" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="theLabel" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="theUnit" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblOutstation" Relationship="Self.FK_tblStrategy_tblOutstation" FromRole="tblStrategy" ToRole="tblOutstation" />
+          <NavigationProperty Name="tblPointValues" Relationship="Self.FK_tblPointValue_tblStrategy" FromRole="tblStrategy" ToRole="tblPointValue" />
+        </EntityType>
+        <Association Name="FK_tblStrategy_tblOutstation">
+          <End Role="tblOutstation" Type="Self.tblOutstation" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblStrategy" Type="Self.tblStrategy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblOutstation">
+              <PropertyRef Name="OutstationId" />
+            </Principal>
+            <Dependent Role="tblStrategy">
+              <PropertyRef Name="OutstationNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPointValue_tblStrategy">
+          <End Role="tblStrategy" Type="Self.tblStrategy" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblPointValue" Type="Self.tblPointValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStrategy">
+              <PropertyRef Name="theIndex" />
+            </Principal>
+            <Dependent Role="tblPointValue">
+              <PropertyRef Name="theIndex" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HOTBOXDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblOutstations" EntityType="Self.tblOutstation" />
+          <EntitySet Name="tblPointValues" EntityType="Self.tblPointValue" />
+          <EntitySet Name="tblStrategies" EntityType="Self.tblStrategy" />
+          <AssociationSet Name="FK_tblStrategy_tblOutstation" Association="Self.FK_tblStrategy_tblOutstation">
+            <End Role="tblOutstation" EntitySet="tblOutstations" />
+            <End Role="tblStrategy" EntitySet="tblStrategies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPointValue_tblStrategy" Association="Self.FK_tblPointValue_tblStrategy">
+            <End Role="tblStrategy" EntitySet="tblStrategies" />
+            <End Role="tblPointValue" EntitySet="tblPointValues" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HOTBOXDBModelStoreContainer" CdmEntityContainer="HOTBOXDBEntities">
+          <EntitySetMapping Name="tblOutstations">
+            <EntityTypeMapping TypeName="HOTBOXDBModel.tblOutstation">
+              <MappingFragment StoreEntitySet="tblOutstation">
+                <ScalarProperty Name="OutstationId" ColumnName="OutstationId" />
+                <ScalarProperty Name="OutstationHostname" ColumnName="OutstationHostname" />
+                <ScalarProperty Name="OutstationLearned" ColumnName="OutstationLearned" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblPointValues">
+            <EntityTypeMapping TypeName="HOTBOXDBModel.tblPointValue">
+              <MappingFragment StoreEntitySet="tblPointValue">
+                <ScalarProperty Name="theIndex" ColumnName="theIndex" />
+                <ScalarProperty Name="DataTime" ColumnName="DataTime" />
+                <ScalarProperty Name="DataValue" ColumnName="DataValue" />
+                <ScalarProperty Name="Counter" ColumnName="Counter" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblStrategies">
+            <EntityTypeMapping TypeName="HOTBOXDBModel.tblStrategy">
+              <MappingFragment StoreEntitySet="tblStrategy">
+                <ScalarProperty Name="theIndex" ColumnName="theIndex" />
+                <ScalarProperty Name="OutstationNo" ColumnName="OutstationNo" />
+                <ScalarProperty Name="Point" ColumnName="Point" />
+                <ScalarProperty Name="theLabel" ColumnName="theLabel" />
+                <ScalarProperty Name="theUnit" ColumnName="theUnit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

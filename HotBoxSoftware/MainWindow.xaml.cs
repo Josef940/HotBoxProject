@@ -29,7 +29,7 @@ namespace HotBoxSoftware
         Facade facade = Facade.Instance;
         List<HotBoxValues> hotboxValues = null;
         List<HotBoxValues> writeablehotboxValues = null;
-        readonly int UPDATESECONDS = 5;
+        readonly int UPDATESECONDS = 15;
         readonly int ERRORMESSAGESECONDS = 12;
         public MainWindow()
         {
