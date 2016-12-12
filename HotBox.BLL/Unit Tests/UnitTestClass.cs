@@ -56,5 +56,35 @@ namespace HotBox.BLL.Unit_Tests
 
             Assert.AreEqual("S100",modules[0].Name);
         }
+
+        [Test]
+        public void Value_Is_A_Viable_Double()
+        {
+            string number1 = "24124";
+            string number2 = "20.45";
+            string number3 = "23.45.4";
+            string number4 = "321d451";
+            string number5 = "344,02";
+            string number6 = "3qde4qw3";
+
+            Assert.AreEqual(true,facade.GetDataLogic().ValueIsADouble(number1));
+            Assert.AreEqual(true, facade.GetDataLogic().ValueIsADouble(number2));
+            Assert.AreEqual(false, facade.GetDataLogic().ValueIsADouble(number3));
+            Assert.AreEqual(false, facade.GetDataLogic().ValueIsADouble(number4));
+            Assert.AreEqual(true, facade.GetDataLogic().ValueIsADouble(number5));
+            Assert.AreEqual(false, facade.GetDataLogic().ValueIsADouble(number6));
+        }
+
+        [Test]
+        public void Hotbox_Gets_Updated_And_ValueDifference_Gets_Set()
+        {
+            List<HotBoxValues> oldboxvalues = new List<HotBoxValues>();
+            List<HotBoxValues> newboxvalues = new List<HotBoxValues>();
+            oldboxvalues.Add(new HotBoxValues { Module="SomeModule", Label="SomeLabel", Unit="SomeUnit", Value=5, valueDifference=null});
+            newboxvalues.Add(new HotBoxValues { Module = "SomeModule", Label = "SomeLabel", Unit = "SomeUnit", Value = 7, valueDifference = null });
+            var returnedlist = facade.GetDataLogic().SetNewValues(oldboxvalues,newboxvalues);
+            Assert.AreEqual(2,returnedlist[0].valueDifference);
+        }
+
     }
 }

@@ -10,7 +10,7 @@ using System.Net.Http;
 
 namespace HotBox.BLL.Business_Logic
 {
-    public class DataBridge
+    public class DataXMLBridge
     {
         Facade facade = Facade.Instance;
 

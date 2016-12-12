@@ -37,8 +37,10 @@ namespace HotBox.BLL.Business_Logic
         public bool ValueIsADouble(string value)
         {
             double d;
-            return double.TryParse(value, out d);
+            value = value.Replace(',', '.');
+            return double.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out d);
         }
+
         // Values in the Params list are converted to a HotBoxValues List
         // for easier access and front-end implementation.
         public List<HotBoxValues> GetHotBoxValues(Hotbox hotbox)

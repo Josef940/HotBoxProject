@@ -48,11 +48,11 @@ namespace HotBox.BLL.Business_Logic
             return datalogic;
         }
 
-        private static DataBridge databridge;
-        public DataBridge GetDataBridge()
+        private static DataXMLBridge databridge;
+        public DataXMLBridge GetDataBridge()
         {
             if (databridge == null)
-                databridge = new DataBridge();
+                databridge = new DataXMLBridge();
 
             return databridge;
         }

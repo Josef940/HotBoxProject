@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HotBox.BLL.Business_Logic
 {
-    class ThreadingLogic
+    public class DatabaseBridge
     {
 
     }
