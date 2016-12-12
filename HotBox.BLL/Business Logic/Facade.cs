@@ -39,6 +39,15 @@ namespace HotBox.BLL.Business_Logic
                 return DALHttpGateway;
         }
 
+        private static DAL.HotboxDB.DBGetData PointRepository;
+        public DAL.HotboxDB.DBGetData GetPointRepository()
+        {
+            if (PointRepository == null)
+                PointRepository = new DAL.HotboxDB.DBGetData();
+
+            return PointRepository;
+        }
+
         private static DataLogic datalogic;
         public DataLogic GetDataLogic()
         {
@@ -48,13 +57,40 @@ namespace HotBox.BLL.Business_Logic
             return datalogic;
         }
 
-        private static DataXMLBridge databridge;
-        public DataXMLBridge GetDataBridge()
+        private static DataXMLBridge dataxmlbridge;
+        public DataXMLBridge GetDataXMLBridge()
         {
-            if (databridge == null)
-                databridge = new DataXMLBridge();
+            if (dataxmlbridge == null)
+                dataxmlbridge = new DataXMLBridge();
 
-            return databridge;
+            return dataxmlbridge;
+        }
+
+        private static DBLogic dblogic;
+        public DBLogic GetDBLogic()
+        {
+            if (dblogic == null)
+                dblogic = new DBLogic();
+
+            return dblogic;
+        }
+
+        private static DatabaseBridge dbbridge;
+        public DatabaseBridge GetDBBridge()
+        {
+            if (dbbridge == null)
+                dbbridge = new DatabaseBridge();
+
+            return dbbridge;
+        }
+
+        private static BEConverter BEconverter;
+        public BEConverter GetBEConverter()
+        {
+            if (BEconverter == null)
+                BEconverter = new BEConverter();
+
+            return BEconverter;
         }
     }
 }

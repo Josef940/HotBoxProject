@@ -16,6 +16,9 @@
             <TextBlock Name="TextBlockLoading" Margin="10" FontSize="14" Visibility="Hidden">
                 Loading...
             </TextBlock>
+                <Button Click="TEST_Click">
+                    TEST BTN
+                </Button>
         </StackPanel>
         <DataGrid Name="moduleDataGrid" IsReadOnly="True" FontSize="16" AlternationCount="2" RowStyle="{StaticResource CustomRowStyle}"
                   Style="{StaticResource CustomDataGrid}"/>

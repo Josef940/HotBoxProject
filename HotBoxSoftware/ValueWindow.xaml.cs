@@ -38,7 +38,7 @@ namespace HotBoxSoftware
         {
             if (facade.GetDataLogic().ValueIsADouble(TextBoxValue.Text))
             {
-                if (facade.GetDataBridge().PostHotBoxValue(hotboxvalues.Module, TextBoxValue.Text))
+                if (facade.GetDataXMLBridge().PostHotBoxValue(hotboxvalues.Module, TextBoxValue.Text))
                 {
                     MessageBox.Show("Value has been successfully set");
                     Close();

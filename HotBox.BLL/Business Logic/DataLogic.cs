@@ -29,7 +29,7 @@ namespace HotBox.BLL.Business_Logic
         {
             if (ValueIsADouble(value))
             {
-                facade.GetDataBridge().PostHotBoxValue(modulename,value);
+                facade.GetDataXMLBridge().PostHotBoxValue(modulename,value);
             }
             return false;
         }
@@ -75,11 +75,11 @@ namespace HotBox.BLL.Business_Logic
         {
             if(hotboxvalues == null)
             {
-                hotboxvalues = GetHotBoxValues(facade.GetDataBridge().GetHotBoxData());
-                writeablehotboxvalues = GetHotBoxValues(facade.GetDataBridge().GetWriteableHotBoxData());
+                hotboxvalues = GetHotBoxValues(facade.GetDataXMLBridge().GetHotBoxData());
+                writeablehotboxvalues = GetHotBoxValues(facade.GetDataXMLBridge().GetWriteableHotBoxData());
             }
-            var newhotboxvalues = GetHotBoxValues(facade.GetDataBridge().GetHotBoxData());
-            var newwriteablehotboxvalues = GetHotBoxValues(facade.GetDataBridge().GetWriteableHotBoxData());
+            var newhotboxvalues = GetHotBoxValues(facade.GetDataXMLBridge().GetHotBoxData());
+            var newwriteablehotboxvalues = GetHotBoxValues(facade.GetDataXMLBridge().GetWriteableHotBoxData());
             if (newhotboxvalues != null && newwriteablehotboxvalues != null)
             {
                 hotboxvalues = SetNewValues(hotboxvalues, newhotboxvalues);

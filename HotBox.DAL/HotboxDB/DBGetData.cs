@@ -24,6 +24,5 @@ namespace HotBox.DAL.HotboxDB
                 return pointvalues;
             }
         }
-
     }
 }

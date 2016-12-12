@@ -95,6 +95,12 @@ namespace HotBoxSoftware
             var vwin = new ValueWindow(DataGridwriteableModule.SelectedItem as HotBoxValues);
             vwin.Show();
         }
+
+        private void TEST_Click(object sender, RoutedEventArgs e)
+        {
+            var test = facade.GetDBLogic().GetPointValues("P2",30);
+
+        }
     }
 
 }
