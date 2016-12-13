@@ -25,7 +25,6 @@ namespace HotBoxSoftware
     /// </summary>
     public partial class MainWindow : Window
     {
-
         Facade facade = Facade.Instance;
         List<HotBoxValues> hotboxValues = null;
         List<HotBoxValues> writeablehotboxValues = null;
@@ -34,6 +33,7 @@ namespace HotBoxSoftware
         public MainWindow()
         {
             InitializeComponent();
+            new ValueChartWindow("P2",1800).Show();
             moduleDataGrid.ItemsSource = hotboxValues;
             DataGridwriteableModule.ItemsSource = writeablehotboxValues;
             UpdateDataGridLoop();
@@ -98,9 +98,7 @@ namespace HotBoxSoftware
 
         private void TEST_Click(object sender, RoutedEventArgs e)
         {
-            var test = facade.GetDBLogic().GetPointValues("P2",30);
-
+            var test = facade.GetDBLogic().GetPointValuesForChart("P2",180);
         }
     }
-
 }

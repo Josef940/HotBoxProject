@@ -14,12 +14,12 @@ namespace HotBox.DAL.HotboxDB
             using (var db = new HOTBOXDBEntities())
             {
                 // Gets server DateTime, and reduces it by 'minutes' to get the desired start date
-                var dateQuery = db.Database.SqlQuery<DateTime>("SELECT getdate()");
+                var dateQuery = db.Database.SqlQuery<DateTime>("SELECT GETDATE()");
                 var serverDate = dateQuery.AsEnumerable().First();
                 var startDate = serverDate.AddMinutes(-minutes);
 
                 int indexNumber = Convert.ToInt32(db.tblStrategies.Where(x => x.Point == pointname).Select(x => x.theIndex).FirstOrDefault());
-                var pointvalues = db.tblPointValues.Where(x => x.DataTime >= startDate).ToList();
+                var pointvalues = db.tblPointValues.Where(x => x.theIndex == indexNumber && (x.DataTime >= startDate)).OrderBy(x => x.DataTime).ToList();
 
                 return pointvalues;
             }
