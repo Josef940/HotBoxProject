@@ -33,7 +33,7 @@ namespace HotBoxSoftware
         public MainWindow()
         {
             InitializeComponent();
-            new ValueChartWindow("P2",1800).Show();
+            new ValueChartWindow("P2",300).Show();
             moduleDataGrid.ItemsSource = hotboxValues;
             DataGridwriteableModule.ItemsSource = writeablehotboxValues;
             UpdateDataGridLoop();

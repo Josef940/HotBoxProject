@@ -61,6 +61,7 @@
     <Compile Include="Business Entities\DBViewModels\PointValue.cs" />
     <Compile Include="Business Entities\HotBoxValues.cs" />
     <Compile Include="Business Entities\Hotbox.cs" />
+    <Compile Include="Business Entities\PointCollectionAndDivisor.cs" />
     <Compile Include="Business Entities\WriteConfirmation.cs" />
     <Compile Include="Business Logic\BEConverter.cs" />
     <Compile Include="Business Logic\DatabaseBridge.cs" />
