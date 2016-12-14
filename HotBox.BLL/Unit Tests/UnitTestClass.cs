@@ -93,23 +93,24 @@ namespace HotBox.BLL.Unit_Tests
         [Test]
         public void Converts_XY_To_Point_To_Be_Used_In_ValueChartWindow()
         {
+            int yPositive = 100;
             double x = 0;
             double y = 30;
-            double divisor = 1;
-            var point1 = facade.GetDBLogic().GetChartPoint(x,y,divisor);
+            int divisor = 1;
+            var point1 = facade.GetDBLogic().GetChartPoint(x,y,divisor,divisor);
             Assert.AreEqual(0,point1.X);
-            Assert.AreEqual(370,point1.Y);
+            Assert.AreEqual(-30+yPositive,point1.Y);
             x = 12.25;
             y = 25.552;
-            var point2 = facade.GetDBLogic().GetChartPoint(x, y,divisor);
+            var point2 = facade.GetDBLogic().GetChartPoint(x, y,divisor,divisor);
             Assert.AreEqual(12.25, point2.X);
-            Assert.AreEqual(374.448, point2.Y);
+            Assert.AreEqual(-25.552 + yPositive, point2.Y);
         }
 
         [Test]
         public void PointValueList_To_PointCollection_Is_Successful()
         {
-            double divisor = 1;
+            int divisor = 1;
             var date1 = new DateTime(2014, 6, 17, 15, 20, 00);
             var date2 = new DateTime(2014, 6, 17, 15, 25, 00);
             var date3 = new DateTime(2014, 6, 17, 15, 35, 00);
@@ -122,15 +123,15 @@ namespace HotBox.BLL.Unit_Tests
             pointvalues.Add(pointvalue3);
             var pointcollection = facade.GetDBLogic().PointValuesToPointCollection(pointvalues);
             Assert.AreEqual(0,pointcollection.PointCollection[0].X);
-            var y1 = facade.GetDBLogic().GetChartPoint(0, pointvalue1.DataValue, divisor);
+            var y1 = facade.GetDBLogic().GetChartPoint(0, pointvalue1.DataValue, divisor, divisor);
             Assert.AreEqual(y1.Y, pointcollection.PointCollection[0].Y);
 
             Assert.AreEqual(5, pointcollection.PointCollection[1].X);
-            var y2 = facade.GetDBLogic().GetChartPoint(0, pointvalue2.DataValue, divisor);
+            var y2 = facade.GetDBLogic().GetChartPoint(0, pointvalue2.DataValue, divisor, divisor);
             Assert.AreEqual(y2.Y, pointcollection.PointCollection[1].Y);
 
             Assert.AreEqual(15, pointcollection.PointCollection[2].X);
-            var y3 = facade.GetDBLogic().GetChartPoint(0, pointvalue3.DataValue,divisor);
+            var y3 = facade.GetDBLogic().GetChartPoint(0, pointvalue3.DataValue,divisor, divisor);
             Assert.AreEqual(y3.Y, pointcollection.PointCollection[2].Y);
         }
     }

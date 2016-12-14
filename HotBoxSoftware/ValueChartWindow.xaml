@@ -8,10 +8,11 @@
         Title="ValueChartWindow" Height="500" Width="1000">
     <Viewbox StretchDirection="Both" Stretch="Fill">
         <Canvas Height="150" Width="400" Name="myCanvas">
-            <TextBlock Margin="0,32" Name="YHighestValue">100</TextBlock>
-            <Polyline Name="yLine" Stroke="Black" StrokeThickness="2" Margin= "25,40"  Points="0 0, 0 100"></Polyline>
-            <Polyline Name="xLine" Stroke="Black" StrokeThickness="2" Margin= "25,40"  Points="0 100, 350 100"></Polyline>
-            <Polyline Name="ValueChart" Margin="25,40" Stroke="Blue" StrokeThickness="2" Points="30 0, 0 100" />
+            <Polyline Name="yLine" Style="{StaticResource yChartStyle}"/>
+            <Polyline Name="xLine" Style="{StaticResource xChartStyle}"></Polyline>
+            <!--DELETE THIS POLYLINE ON DEPLOYMENT-->
+            <Polyline Name="ValueChart" 
+                      Style="{StaticResource ChartValueStyle}" Points="30 0, 0 100" />
         </Canvas>
     </Viewbox>
 </Window>

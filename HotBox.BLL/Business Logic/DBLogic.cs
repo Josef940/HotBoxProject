@@ -13,7 +13,8 @@ namespace HotBox.BLL.Business_Logic
     public class DBLogic
     {
         Facade facade = Facade.Instance;
-        readonly int MAX_CHART_POINT = 100;
+        readonly int xPositiveLength = 350;
+        readonly int yPositiveLength = 100;
         public PointCollectionAndDivisor GetPointValuesForChart(string pointname, int minutes)
         {
             List<PointValue> values = new List<PointValue>();
@@ -34,25 +35,47 @@ namespace HotBox.BLL.Business_Logic
 
             var pointcollection = new PointCollection();
             DateTime startDate = pointvalues[0].DataTime;
-            var pointdivisor = pointvalues.Max(x => x.DataValue) / MAX_CHART_POINT;
+
+            var yPointDivisor = Convert.ToInt32(Math.Ceiling(pointvalues.Max(x => x.DataValue) / yPositiveLength));
+            var xPointDivisor = CalculateXDivisor(pointvalues);
+            yPointDivisor = Convert.ToInt32(Math.Pow(2, yPointDivisor - 1));
+            xPointDivisor = Convert.ToInt32(Math.Pow(2, xPointDivisor - 1));
             foreach (var item in pointvalues)
             {
                 double minutedifference = (item.DataTime - startDate).TotalMinutes;
-                pointcollection.Add(GetChartPoint(minutedifference, item.DataValue, pointdivisor));
+                pointcollection.Add(GetChartPoint(minutedifference, item.DataValue, xPointDivisor, yPointDivisor));
             }
+
             var pointAndDiv = new PointCollectionAndDivisor
             {
                 PointCollection = pointcollection,
-                Divisor = pointdivisor
+                yDivisor = yPointDivisor,
+                xDivisor = xPointDivisor
             };
             return pointAndDiv;
         }
 
-        public Point GetChartPoint(double x, double y, double divisor)
+        public int CalculateXDivisor(List<PointValue> pointvalues)
+        {
+            List<int> minutedifference = new List<int>();
+            DateTime startDate = pointvalues[0].DataTime;
+            foreach (var item in pointvalues)
+            {
+                minutedifference.Add(Convert.ToInt32(Math.Ceiling((item.DataTime - startDate).TotalMinutes / yPositiveLength)));
+            }
+
+            int highestValue = Convert.ToInt32(Math.Ceiling(pointvalues.Max(x => x.DataValue) / xPositiveLength));
+
+            return highestValue;
+        }
+
+        public Point GetChartPoint(double x, double y, int xdivisor, int ydivisor)
         {
             // The added value can be changed if it is wished to change the height
             // of the ValueChartWindow.xaml
-            y = -y + MAX_CHART_POINT;
+            y /= ydivisor;
+            y = (-y + yPositiveLength);
+            x /= xdivisor;
             return new Point(x, y);
         }
     }

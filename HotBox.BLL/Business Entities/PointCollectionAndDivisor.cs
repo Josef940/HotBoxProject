@@ -10,6 +10,7 @@ namespace HotBox.BLL.Business_Entities
     public class PointCollectionAndDivisor
     {
         public PointCollection PointCollection { get; set; }
-        public double Divisor { get; set; }
+        public int yDivisor { get; set; }
+        public int xDivisor { get; set; }
     }
 }
