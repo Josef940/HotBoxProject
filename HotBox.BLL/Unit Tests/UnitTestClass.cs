@@ -134,5 +134,24 @@ namespace HotBox.BLL.Unit_Tests
             var y3 = facade.GetDBLogic().GetChartPoint(0, pointvalue3.DataValue,divisor, divisor);
             Assert.AreEqual(y3.Y, pointcollection.PointCollection[2].Y);
         }
+        [Test]
+        public void Calculate_xDivisor_Test()
+        {
+            int xPositiveLength = 350;
+            var date1 = new DateTime(2014, 6, 14, 15, 20, 00);
+            var date2 = new DateTime(2014, 6, 17, 15, 25, 00);
+            var date3 = new DateTime(2014, 6, 17, 15, 35, 00);
+            var pointvalue1 = new PointValue { DataTime = date1, DataValue = 20.5, theIndex = 1 };
+            var pointvalue2 = new PointValue { DataTime = date2, DataValue = 22.5, theIndex = 1 };
+            var pointvalue3 = new PointValue { DataTime = date3, DataValue = 19.22, theIndex = 1 };
+            var pointvalues = new List<PointValue>();
+            pointvalues.Add(pointvalue1);
+            pointvalues.Add(pointvalue2);
+            pointvalues.Add(pointvalue3);
+            var highestMinuteDifference = (date3 - date1).TotalMinutes / xPositiveLength;
+            var expectedDivisor = Convert.ToInt32(Math.Ceiling(highestMinuteDifference));
+            var divisor = facade.GetDBLogic().CalculateXDivisor(pointvalues);
+            Assert.AreEqual(expectedDivisor,divisor);
+        }
     }
 }

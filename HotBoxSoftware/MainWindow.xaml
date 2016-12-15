@@ -13,19 +13,21 @@
             <TextBlock Name="TextBlockError" Foreground="Red" Margin="10" FontWeight="Bold" FontSize="16" Visibility="Hidden">
             Error updating values!
             </TextBlock>
-            <TextBlock Name="TextBlockLoading" Margin="10" FontSize="14" Visibility="Hidden">
+                <TextBlock Name="TextBlockLoading" Margin="10" FontSize="14" Visibility="Hidden">
                 Loading...
-            </TextBlock>
-                <Button Click="TEST_Click">
-                    TEST BTN
-                </Button>
-        </StackPanel>
+                </TextBlock>
+                <TextBlock Margin="0,50,0,0">Minutes for graph</TextBlock>
+                <TextBox VerticalAlignment="Bottom" Name="Minutes_TextBox" Text="30"/>
+            </StackPanel>
         <DataGrid Name="moduleDataGrid" IsReadOnly="True" FontSize="16" AlternationCount="2" RowStyle="{StaticResource CustomRowStyle}"
-                  Style="{StaticResource CustomDataGrid}"/>
+                 MouseDoubleClick="Second_Open_ValueChartWindow_MouseDoubleClick" Style="{StaticResource CustomDataGrid}"/>
 
-        <DataGrid Name="DataGridwriteableModule" IsReadOnly="True" FontSize="16" MouseDoubleClick="OpenValueWindow_MouseDoubleClick"
-                  Style="{StaticResource CustomDataGrid}" RowStyle="{StaticResource CustomRowStyle}" AlternationCount="2"/>
-
-    </DockPanel>
+            <!--MouseDoubleClick="OpenValueWindow_MouseDoubleClick"-->
+            <StackPanel>
+            <DataGrid Name="DataGridwriteableModule" IsReadOnly="True" FontSize="16" 
+                MouseDoubleClick="Open_ValueChartWindow_MouseDoubleClick"  Style="{StaticResource CustomDataGrid}" RowStyle="{StaticResource CustomRowStyle}" AlternationCount="2"/>
+                <Button Click="SetValue_Click" FontSize="18" Margin="0,10,0,0" HorizontalAlignment="Stretch">Set value</Button>
+            </StackPanel>
+        </DockPanel>
     </Viewbox>
 </Window>

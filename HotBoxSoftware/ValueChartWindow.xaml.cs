@@ -1,4 +1,5 @@
-﻿using HotBox.BLL.Business_Entities.DBViewModels;
+﻿using HotBox.BLL.Business_Entities;
+using HotBox.BLL.Business_Entities.DBViewModels;
 using HotBox.BLL.Business_Logic;
 using System;
 using System.Collections.Generic;
@@ -36,10 +37,12 @@ namespace HotBoxSoftware
         double pointLineMarginLeft;
         double pointLineMarginTop;
         List<Tuple<int, int>> xSideValues = new List<Tuple<int, int>>();
-        public ValueChartWindow(string pointName, int minutes)
+        public ValueChartWindow(HotBoxValues hbvalues, int minutes)
         {
             InitializeComponent();
-            this.pointName = pointName;
+            this.pointName = hbvalues.Module;
+            // DELETE NEXT LINE
+            pointName = "P2";
             this.minutes = minutes;
             //
             xLength = xLine.Points[1].X;
@@ -51,11 +54,21 @@ namespace HotBoxSoftware
             pointLineMarginTop = xLine.Margin.Top;
             //
             var pointvalues = facade.GetDBLogic().GetPointValuesForChart(pointName, minutes);
-            ValueChart.Points = pointvalues.PointCollection;
-            yDivisor = pointvalues.yDivisor;
-            xDivisor = pointvalues.xDivisor;
-            //SetChartPoints();
-            SetChartLineValues();
+            if (pointvalues != null)
+            {
+                ValueChart.Points = pointvalues.PointCollection;
+                yDivisor = pointvalues.yDivisor;
+                xDivisor = pointvalues.xDivisor;
+                //SetChartPoints();
+                SetChartLineValues();
+            }
+            else
+                ValuesNotFound();
+        }
+
+        public void ValuesNotFound()
+        {
+            NoValues_Textblock.Visibility = Visibility.Visible;
         }
 
         public void SetChartLineValues()

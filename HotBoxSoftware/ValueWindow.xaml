@@ -16,7 +16,7 @@
 
                     <TextBlock Name="TextBlockUnit" HorizontalAlignment="Center" FontSize="14"/>
                 </StackPanel>
-            <Button HorizontalAlignment="Center" Height="30" Width="100" FontSize="14" FontWeight="Bold" Click="Apply_Click">
+            <Button HorizontalAlignment="Center" Height="30" Width="100" FontSize="14" FontWeight="Bold" Click="Apply_Click" IsDefault="True">
                 Apply change
             </Button>
         </StackPanel>

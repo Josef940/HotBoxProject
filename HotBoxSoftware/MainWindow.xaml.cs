@@ -33,7 +33,7 @@ namespace HotBoxSoftware
         public MainWindow()
         {
             InitializeComponent();
-            new ValueChartWindow("P2",300).Show();
+            //new ValueChartWindow("P2",300).Show();
             moduleDataGrid.ItemsSource = hotboxValues;
             DataGridwriteableModule.ItemsSource = writeablehotboxValues;
             UpdateDataGridLoop();
@@ -41,7 +41,7 @@ namespace HotBoxSoftware
 
         private Task UpdateDataGridLoop()
         {
-            return Task.Factory.StartNew(()=>
+            return Task.Factory.StartNew(() =>
             {
                 while (true)
                 {
@@ -98,7 +98,36 @@ namespace HotBoxSoftware
 
         private void TEST_Click(object sender, RoutedEventArgs e)
         {
-            var test = facade.GetDBLogic().GetPointValuesForChart("P2",180);
+            var test = facade.GetDBLogic().GetPointValuesForChart("P2", 180);
+        }
+
+        private void Odpen_PickChartInfoWindow_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var chartinfowin = new PickChartInfoWindow(DataGridwriteableModule.SelectedItem as HotBoxValues);
+            chartinfowin.Show();
+
+        }
+
+        private void Open_ValueChartWindow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            int minutes = Convert.ToInt32(Minutes_TextBox.Text);
+            var chartwin = new ValueChartWindow(DataGridwriteableModule.SelectedItem as HotBoxValues, minutes);
+            chartwin.Show();
+        }
+        private void Second_Open_ValueChartWindow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            int minutes = Convert.ToInt32(Minutes_TextBox.Text);
+            var chartwin = new ValueChartWindow(moduleDataGrid.SelectedItem as HotBoxValues, minutes);
+            chartwin.Show();
+        }
+
+        private void SetValue_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataGridwriteableModule.SelectedItem != null)
+            {
+                var hotboxValue = DataGridwriteableModule.SelectedItem as HotBoxValues;
+                new ValueWindow(hotboxValue).Show();
+            }
         }
     }
 }

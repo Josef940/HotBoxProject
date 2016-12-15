@@ -57,14 +57,14 @@ namespace HotBox.BLL.Business_Logic
 
         public int CalculateXDivisor(List<PointValue> pointvalues)
         {
-            List<int> minutedifference = new List<int>();
+            var minutedifference = new List<double>();
             DateTime startDate = pointvalues[0].DataTime;
             foreach (var item in pointvalues)
             {
-                minutedifference.Add(Convert.ToInt32(Math.Ceiling((item.DataTime - startDate).TotalMinutes / yPositiveLength)));
+                minutedifference.Add((item.DataTime - startDate).TotalMinutes);
             }
 
-            int highestValue = Convert.ToInt32(Math.Ceiling(pointvalues.Max(x => x.DataValue) / xPositiveLength));
+            int highestValue = Convert.ToInt32(Math.Ceiling(minutedifference.Max() / xPositiveLength));
 
             return highestValue;
         }
