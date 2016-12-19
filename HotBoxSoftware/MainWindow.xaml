@@ -16,9 +16,9 @@
                 <TextBlock Name="TextBlockLoading" Margin="10" FontSize="14" Visibility="Hidden">
                 Loading...
                 </TextBlock>
-                <TextBlock Margin="0,50,0,0">Minutes for graph</TextBlock>
-                <TextBox VerticalAlignment="Bottom" Name="Minutes_TextBox" Text="30" TextChanged="Minutes_TextBox_TextChanged">
-                </TextBox>
+                <TextBlock FontSize="16" Margin="0,50,0,0">Show chart data from</TextBlock>
+                <TextBox FontSize="16" FontWeight="Bold" VerticalAlignment="Bottom" Name="Minutes_TextBox" Text="30" TextChanged="Minutes_TextBox_TextChanged" TextAlignment="Center"/>
+                <TextBlock FontSize="16" >minutes ago to now</TextBlock>
             </StackPanel>
         <DataGrid Name="moduleDataGrid" IsReadOnly="True" FontSize="16" AlternationCount="2" RowStyle="{StaticResource CustomRowStyle}"
                  MouseDoubleClick="Second_Open_ValueChartWindow_MouseDoubleClick" Style="{StaticResource CustomDataGrid}"/>

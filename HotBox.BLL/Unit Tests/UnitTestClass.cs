@@ -154,6 +154,7 @@ namespace HotBox.BLL.Unit_Tests
             Assert.AreEqual(expectedDivisor,divisor);
         }
 
+        [Test]
         public void TextIsValidTextBoxInteger()
         {
             var string1 = "2019";
@@ -161,18 +162,27 @@ namespace HotBox.BLL.Unit_Tests
             var string3 = "kopq.+1eq29";
             var string4 = "202.26";
             var string5 = "202.2620323.13ldm";
+            var string6 = "";
+            var string7 = "0";
+            var string8 = "000051";
 
             var newString1 = facade.GetViewLogic().ValidTextBoxInteger(string1);
             var newString2 = facade.GetViewLogic().ValidTextBoxInteger(string2);
             var newString3 = facade.GetViewLogic().ValidTextBoxInteger(string3);
             var newString4 = facade.GetViewLogic().ValidTextBoxInteger(string4);
             var newString5 = facade.GetViewLogic().ValidTextBoxInteger(string5);
+            var newString6 = facade.GetViewLogic().ValidTextBoxInteger(string6);
+            var newString7 = facade.GetViewLogic().ValidTextBoxInteger(string7);
+            var newString8 = facade.GetViewLogic().ValidTextBoxInteger(string8);
 
-            Assert.AreEqual(newString1, 2019);
-            Assert.AreEqual(newString2, 2010);
-            Assert.AreEqual(newString3, 129);
-            Assert.AreEqual(newString4, 20226);
-            Assert.AreEqual(newString5, 202262);
+            Assert.AreEqual(newString1, "2019");
+            Assert.AreEqual(newString2, "2010");
+            Assert.AreEqual(newString3, "129");
+            Assert.AreEqual(newString4, "20226");
+            Assert.AreEqual(newString5, "202262");
+            Assert.AreEqual(newString6,"0");
+            Assert.AreEqual(newString7, "0");
+            Assert.AreEqual(newString8, "51");
         }
     }
 }
