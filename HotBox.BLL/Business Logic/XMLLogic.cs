@@ -11,7 +11,7 @@ using System.Xml.Serialization;
 
 namespace HotBox.BLL.Business_Logic
 {
-    public class DataLogic
+    public class XMLLogic
     {
         Facade facade = Facade.Instance;
         public Hotbox GetHotBoxData()

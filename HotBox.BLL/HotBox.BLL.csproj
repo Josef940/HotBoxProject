@@ -65,7 +65,8 @@
     <Compile Include="Business Entities\WriteConfirmation.cs" />
     <Compile Include="Business Logic\BEConverter.cs" />
     <Compile Include="Business Logic\DatabaseBridge.cs" />
-    <Compile Include="Business Logic\DataLogic.cs" />
+    <Compile Include="Business Logic\ViewLogic.cs" />
+    <Compile Include="Business Logic\XMLLogic.cs" />
     <Compile Include="Business Logic\DBLogic.cs" />
     <Compile Include="Business Logic\Facade.cs" />
     <Compile Include="Business Logic\DataXMLBridge.cs" />

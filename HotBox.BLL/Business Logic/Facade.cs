@@ -48,11 +48,11 @@ namespace HotBox.BLL.Business_Logic
             return PointRepository;
         }
 
-        private static DataLogic datalogic;
-        public DataLogic GetDataLogic()
+        private static XMLLogic datalogic;
+        public XMLLogic GetDataLogic()
         {
             if (datalogic == null)
-                datalogic = new DataLogic();
+                datalogic = new XMLLogic();
 
             return datalogic;
         }
@@ -91,6 +91,15 @@ namespace HotBox.BLL.Business_Logic
                 BEconverter = new BEConverter();
 
             return BEconverter;
+        }
+
+        private static ViewLogic viewLogic;
+        public ViewLogic GetViewLogic()
+        {
+            if (viewLogic == null)
+                viewLogic = new ViewLogic();
+
+            return viewLogic;
         }
     }
 }

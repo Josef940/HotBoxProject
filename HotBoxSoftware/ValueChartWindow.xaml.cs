@@ -28,21 +28,18 @@ namespace HotBoxSoftware
         int minutes;
         int yDivisor = 1;
         int xDivisor = 1;
-        double xLength;
-        double yLength;
-        double yLengthInMinus;
+        double xLength, yLength, yLengthInMinus;
         readonly int XUNIT = 10;
         readonly int YUNIT = 10;
         readonly int AXIS_POINT_LINE_LENGTH = 4;
         double pointLineMarginLeft;
         double pointLineMarginTop;
-        List<Tuple<int, int>> xSideValues = new List<Tuple<int, int>>();
         public ValueChartWindow(HotBoxValues hbvalues, int minutes)
         {
             InitializeComponent();
             this.pointName = hbvalues.Module;
             // DELETE NEXT LINE
-            pointName = "P2";
+            //pointName = "P2";
             this.minutes = minutes;
             //
             xLength = xLine.Points[1].X;
@@ -73,7 +70,7 @@ namespace HotBoxSoftware
 
         public void SetChartLineValues()
         {
-            // Generates lines and number for the y-axis above 0
+            // Generates point-lines and numbers for the y-axis above 0
             for (int i = 0; i < (yLength - yLengthInMinus) / YUNIT; i++)
             {
                 var tb = new TextBlock();
@@ -88,7 +85,7 @@ namespace HotBoxSoftware
                 yPointLine.Points = new PointCollection { new Point(-AXIS_POINT_LINE_LENGTH, i * YUNIT), new Point(AXIS_POINT_LINE_LENGTH, i * YUNIT) };
                 myCanvas.Children.Add(yPointLine);
             }
-            // Generates lines and number for the y-axis below 0
+            // Generates point-lines and numbers for the y-axis below 0
             for (int i = 1; i < (yLengthInMinus / YUNIT) + 1; i++)
             {
                 var tb = new TextBlock();
@@ -103,7 +100,7 @@ namespace HotBoxSoftware
                 yPointLine.Points = new PointCollection { new Point(-AXIS_POINT_LINE_LENGTH, i * YUNIT + yPositive), new Point(AXIS_POINT_LINE_LENGTH, i * YUNIT + yPositive) };
                 myCanvas.Children.Add(yPointLine);
             }
-            // Generates lines and number for the x-axis
+            // Generates point-lines and numbers for the x-axis
             for (int i = 1; i < (xLength / XUNIT) + 1; i++)
             {
                 if (i % 2 != 0)

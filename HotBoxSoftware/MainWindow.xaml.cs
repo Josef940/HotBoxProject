@@ -129,5 +129,11 @@ namespace HotBoxSoftware
                 new ValueWindow(hotboxValue).Show();
             }
         }
+
+        private void Minutes_TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Minutes_TextBox.Text = facade.GetViewLogic().ValidTextBoxInteger(Minutes_TextBox.Text);
+            Minutes_TextBox.SelectionStart = Minutes_TextBox.Text.Length;
+        }
     }
 }

@@ -153,5 +153,26 @@ namespace HotBox.BLL.Unit_Tests
             var divisor = facade.GetDBLogic().CalculateXDivisor(pointvalues);
             Assert.AreEqual(expectedDivisor,divisor);
         }
+
+        public void TextIsValidTextBoxInteger()
+        {
+            var string1 = "2019";
+            var string2 = "201ikdoj0";
+            var string3 = "kopq.+1eq29";
+            var string4 = "202.26";
+            var string5 = "202.2620323.13ldm";
+
+            var newString1 = facade.GetViewLogic().ValidTextBoxInteger(string1);
+            var newString2 = facade.GetViewLogic().ValidTextBoxInteger(string2);
+            var newString3 = facade.GetViewLogic().ValidTextBoxInteger(string3);
+            var newString4 = facade.GetViewLogic().ValidTextBoxInteger(string4);
+            var newString5 = facade.GetViewLogic().ValidTextBoxInteger(string5);
+
+            Assert.AreEqual(newString1, 2019);
+            Assert.AreEqual(newString2, 2010);
+            Assert.AreEqual(newString3, 129);
+            Assert.AreEqual(newString4, 20226);
+            Assert.AreEqual(newString5, 202262);
+        }
     }
 }
