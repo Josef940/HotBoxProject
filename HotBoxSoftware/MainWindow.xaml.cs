@@ -132,7 +132,7 @@ namespace HotBoxSoftware
 
         private void Minutes_TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Minutes_TextBox.Text = facade.GetViewLogic().ValidTextBoxInteger(Minutes_TextBox.Text);
+            Minutes_TextBox.Text = facade.GetViewLogic().GetValidInteger(Minutes_TextBox.Text,6);
             Minutes_TextBox.SelectionStart = Minutes_TextBox.Text.Length;
         }
     }

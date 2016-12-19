@@ -157,7 +157,7 @@ namespace HotBox.BLL.Unit_Tests
         [Test]
         public void TextIsValidTextBoxInteger()
         {
-            var string1 = "2019";
+            var string1 = "2019q";
             var string2 = "201ikdoj0";
             var string3 = "kopq.+1eq29";
             var string4 = "202.26";
@@ -165,24 +165,27 @@ namespace HotBox.BLL.Unit_Tests
             var string6 = "";
             var string7 = "0";
             var string8 = "000051";
+            var string9 = "Nothing here :)";
 
-            var newString1 = facade.GetViewLogic().ValidTextBoxInteger(string1);
-            var newString2 = facade.GetViewLogic().ValidTextBoxInteger(string2);
-            var newString3 = facade.GetViewLogic().ValidTextBoxInteger(string3);
-            var newString4 = facade.GetViewLogic().ValidTextBoxInteger(string4);
-            var newString5 = facade.GetViewLogic().ValidTextBoxInteger(string5);
-            var newString6 = facade.GetViewLogic().ValidTextBoxInteger(string6);
-            var newString7 = facade.GetViewLogic().ValidTextBoxInteger(string7);
-            var newString8 = facade.GetViewLogic().ValidTextBoxInteger(string8);
+            var newString1 = facade.GetViewLogic().GetValidInteger(string1, 6);
+            var newString2 = facade.GetViewLogic().GetValidInteger(string2, 6);
+            var newString3 = facade.GetViewLogic().GetValidInteger(string3, 6);
+            var newString4 = facade.GetViewLogic().GetValidInteger(string4, 6);
+            var newString5 = facade.GetViewLogic().GetValidInteger(string5, 6);
+            var newString6 = facade.GetViewLogic().GetValidInteger(string6, 6);
+            var newString7 = facade.GetViewLogic().GetValidInteger(string7, 6);
+            var newString8 = facade.GetViewLogic().GetValidInteger(string8, 6);
+            var newString9 = facade.GetViewLogic().GetValidInteger(string9, 6);
 
             Assert.AreEqual(newString1, "2019");
             Assert.AreEqual(newString2, "2010");
             Assert.AreEqual(newString3, "129");
             Assert.AreEqual(newString4, "20226");
             Assert.AreEqual(newString5, "202262");
-            Assert.AreEqual(newString6,"0");
+            Assert.AreEqual(newString6, "0");
             Assert.AreEqual(newString7, "0");
             Assert.AreEqual(newString8, "51");
+            Assert.AreEqual(newString9, "0");
         }
     }
 }
