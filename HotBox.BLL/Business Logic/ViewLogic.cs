@@ -8,7 +8,7 @@ namespace HotBox.BLL.Business_Logic
 {
     public class ViewLogic
     {
-        public string GetValidInteger(string input, int maxLength)
+        public string GetValidIntegerAsString(string input, int maxLength)
         {
             var stringBuilder = new StringBuilder();
             stringBuilder.Append(input);
@@ -38,6 +38,53 @@ namespace HotBox.BLL.Business_Logic
 
             var output = stringBuilder.ToString();
             return output;
+        }
+
+        public string MinutesToTimeText(int minutes)
+        {
+            TimeSpan span = TimeSpan.FromMinutes(minutes);
+            string label = span.ToString(@"dd\.hh\.mm");
+            var sb = new StringBuilder();
+            int i = 0;
+            int steps = 3;
+            int number = 0;
+            while (steps > 0)
+            {
+                switch (steps)
+                {
+                    case 3:
+                        number = Convert.ToInt32(label.Substring(i, 2));
+                        sb.Append(SingleTimeFormat("day", number, false));
+                        steps--;
+                        i += 3;
+                        break;
+                    case 2:
+                        number = Convert.ToInt32(label.Substring(i, 2));
+                        sb.Append(SingleTimeFormat("hour", number, false));
+                        steps--;
+                        i += 3;
+                        break;
+                    case 1:
+                        number = Convert.ToInt32(label.Substring(i, 2));
+                        sb.Append(SingleTimeFormat("minute", number, true));
+                        steps--;
+                        i += 3;
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            return sb.ToString();
+        }
+
+        private string SingleTimeFormat(string timeUnit, int num, bool lastUnit)
+        {
+            var pluralS = num == 1 ? string.Empty : "s";
+            var comma = lastUnit ? string.Empty : ", ";
+            var s = string.Format("{0} {1}{2}{3}",num,timeUnit,pluralS,comma);
+
+            return s;
         }
     }
 }

@@ -81,10 +81,10 @@ namespace HotBox.BLL.Unit_Tests
         {
             List<HotBoxValues> oldboxvalues = new List<HotBoxValues>();
             List<HotBoxValues> newboxvalues = new List<HotBoxValues>();
-            oldboxvalues.Add(new HotBoxValues { Module="SomeModule", Label="SomeLabel", Unit="SomeUnit", Value=5, valueDifference=null});
-            newboxvalues.Add(new HotBoxValues { Module = "SomeModule", Label = "SomeLabel", Unit = "SomeUnit", Value = 7, valueDifference = null });
+            oldboxvalues.Add(new HotBoxValues { Module="SomeModule", Label="SomeLabel", Unit="SomeUnit", Value=5, ValueDifference=null});
+            newboxvalues.Add(new HotBoxValues { Module = "SomeModule", Label = "SomeLabel", Unit = "SomeUnit", Value = 7, ValueDifference = null });
             var returnedlist = facade.GetDataLogic().SetNewValues(oldboxvalues,newboxvalues);
-            Assert.AreEqual(2,returnedlist[0].valueDifference);
+            Assert.AreEqual(2,returnedlist[0].ValueDifference);
         }
 
         // NOTE:
@@ -111,18 +111,23 @@ namespace HotBox.BLL.Unit_Tests
         public void PointValueList_To_PointCollection_Is_Successful()
         {
             int divisor = 1;
+
             var date1 = new DateTime(2014, 6, 17, 15, 20, 00);
             var date2 = new DateTime(2014, 6, 17, 15, 25, 00);
             var date3 = new DateTime(2014, 6, 17, 15, 35, 00);
+
             var pointvalue1 = new PointValue { DataTime = date1, DataValue=20.5, theIndex = 1};
             var pointvalue2 = new PointValue { DataTime = date2, DataValue = 22.5, theIndex = 1 };
             var pointvalue3 = new PointValue { DataTime = date3, DataValue = 19.22, theIndex = 1 };
             var pointvalues = new List<PointValue>();
+
             pointvalues.Add(pointvalue1);
             pointvalues.Add(pointvalue2);
             pointvalues.Add(pointvalue3);
+
             var pointcollection = facade.GetDBLogic().PointValuesToPointCollection(pointvalues);
             Assert.AreEqual(0,pointcollection.PointCollection[0].X);
+
             var y1 = facade.GetDBLogic().GetChartPoint(0, pointvalue1.DataValue, divisor, divisor);
             Assert.AreEqual(y1.Y, pointcollection.PointCollection[0].Y);
 
@@ -152,6 +157,21 @@ namespace HotBox.BLL.Unit_Tests
             var expectedDivisor = Convert.ToInt32(Math.Ceiling(highestMinuteDifference));
             var divisor = facade.GetDBLogic().CalculateXDivisor(pointvalues);
             Assert.AreEqual(expectedDivisor,divisor);
+
+
+            var date12 = new DateTime(2014, 6, 13, 10, 20, 00);
+            var date22 = new DateTime(2014, 6, 17, 15, 25, 00);
+            var pointvalue12 = new PointValue { DataTime = date1, DataValue = 20.5, theIndex = 1 };
+            var pointvalue22 = new PointValue { DataTime = date2, DataValue = 22.5, theIndex = 1 };
+            var pointvalues2 = new List<PointValue>();
+            pointvalues2.Add(pointvalue12);
+            pointvalues2.Add(pointvalue22);
+
+            var highestMinuteDifference2 = (date22 - date12).TotalMinutes / xPositiveLength;
+            var expectedDivisor2 = Convert.ToInt32(Math.Ceiling(highestMinuteDifference));
+            var divisor2 = facade.GetDBLogic().CalculateXDivisor(pointvalues2);
+            Assert.AreEqual(expectedDivisor2, divisor2);
+
         }
 
         [Test]
@@ -167,15 +187,15 @@ namespace HotBox.BLL.Unit_Tests
             var string8 = "000051";
             var string9 = "Nothing here :)";
 
-            var newString1 = facade.GetViewLogic().GetValidInteger(string1, 6);
-            var newString2 = facade.GetViewLogic().GetValidInteger(string2, 6);
-            var newString3 = facade.GetViewLogic().GetValidInteger(string3, 6);
-            var newString4 = facade.GetViewLogic().GetValidInteger(string4, 6);
-            var newString5 = facade.GetViewLogic().GetValidInteger(string5, 6);
-            var newString6 = facade.GetViewLogic().GetValidInteger(string6, 6);
-            var newString7 = facade.GetViewLogic().GetValidInteger(string7, 6);
-            var newString8 = facade.GetViewLogic().GetValidInteger(string8, 6);
-            var newString9 = facade.GetViewLogic().GetValidInteger(string9, 6);
+            var newString1 = facade.GetViewLogic().GetValidIntegerAsString(string1, 6);
+            var newString2 = facade.GetViewLogic().GetValidIntegerAsString(string2, 6);
+            var newString3 = facade.GetViewLogic().GetValidIntegerAsString(string3, 6);
+            var newString4 = facade.GetViewLogic().GetValidIntegerAsString(string4, 6);
+            var newString5 = facade.GetViewLogic().GetValidIntegerAsString(string5, 6);
+            var newString6 = facade.GetViewLogic().GetValidIntegerAsString(string6, 6);
+            var newString7 = facade.GetViewLogic().GetValidIntegerAsString(string7, 6);
+            var newString8 = facade.GetViewLogic().GetValidIntegerAsString(string8, 6);
+            var newString9 = facade.GetViewLogic().GetValidIntegerAsString(string9, 6);
 
             Assert.AreEqual(newString1, "2019");
             Assert.AreEqual(newString2, "2010");
@@ -186,6 +206,21 @@ namespace HotBox.BLL.Unit_Tests
             Assert.AreEqual(newString7, "0");
             Assert.AreEqual(newString8, "51");
             Assert.AreEqual(newString9, "0");
+        }
+
+        [Test]
+        public void Minutes_To_Days_Hours_Minutes_String_Test()
+        {
+            // 2 days, 1 hour and 45 minutes in minutes
+            int minutes = 2985;
+            string timeString = facade.GetViewLogic().MinutesToTimeText(minutes);
+
+            int minutes2 = 0;
+            string timeString2 = facade.GetViewLogic().MinutesToTimeText(minutes2);
+            
+            Assert.AreEqual("2 days, 1 hour, 45 minutes", timeString);
+
+            Assert.AreEqual("0 days, 0 hours, 0 minutes", timeString2);
         }
     }
 }

@@ -38,8 +38,6 @@ namespace HotBox.BLL.Business_Logic
 
             var yPointDivisor = Convert.ToInt32(Math.Ceiling(pointvalues.Max(x => x.DataValue) / yPositiveLength));
             var xPointDivisor = CalculateXDivisor(pointvalues);
-            yPointDivisor = Convert.ToInt32(Math.Pow(2, yPointDivisor - 1));
-            xPointDivisor = Convert.ToInt32(Math.Pow(2, xPointDivisor - 1));
             foreach (var item in pointvalues)
             {
                 double minutedifference = (item.DataTime - startDate).TotalMinutes;
@@ -64,9 +62,9 @@ namespace HotBox.BLL.Business_Logic
                 minutedifference.Add((item.DataTime - startDate).TotalMinutes);
             }
 
-            int highestValue = Convert.ToInt32(Math.Ceiling(minutedifference.Max() / xPositiveLength));
+            int xDivisor = Convert.ToInt32(Math.Ceiling(minutedifference.Max() / xPositiveLength));
 
-            return highestValue;
+            return xDivisor;
         }
 
         public Point GetChartPoint(double x, double y, int xdivisor, int ydivisor)

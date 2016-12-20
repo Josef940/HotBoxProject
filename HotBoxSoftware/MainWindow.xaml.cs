@@ -28,15 +28,17 @@ namespace HotBoxSoftware
         Facade facade = Facade.Instance;
         List<HotBoxValues> hotboxValues = null;
         List<HotBoxValues> writeablehotboxValues = null;
-        readonly int UPDATESECONDS = 15;
-        readonly int ERRORMESSAGESECONDS = 12;
+        readonly int UPDATE_SECONDS = 15;
+
+        // Amount of seconds the error message will show on the screen
+        readonly int ERROR_MESSAGE_SECONDS = 12;
         public MainWindow()
         {
             InitializeComponent();
-            //new ValueChartWindow("P2",300).Show();
             moduleDataGrid.ItemsSource = hotboxValues;
             DataGridwriteableModule.ItemsSource = writeablehotboxValues;
             UpdateDataGridLoop();
+            Time_TextBlock.Text = "("+facade.GetViewLogic().MinutesToTimeText(Convert.ToInt32(0))+")";
         }
 
         private Task UpdateDataGridLoop()
@@ -53,7 +55,7 @@ namespace HotBoxSoftware
                         InvokeDispatcher(() => RefreshHotBoxDataGrid());
                     else
                         Task.Factory.StartNew(() => TextBlockErrorToVisible());
-                    Thread.Sleep(TimeSpan.FromSeconds(UPDATESECONDS));
+                    Thread.Sleep(TimeSpan.FromSeconds(UPDATE_SECONDS));
                 }
             });
         }
@@ -65,7 +67,7 @@ namespace HotBoxSoftware
             return Task.Factory.StartNew(() =>
             {
                 InvokeDispatcher(() => TextBlockError.Visibility = Visibility.Visible);
-                Thread.Sleep(TimeSpan.FromSeconds(ERRORMESSAGESECONDS));
+                Thread.Sleep(TimeSpan.FromSeconds(ERROR_MESSAGE_SECONDS));
             })
                 .ContinueWith(_ => InvokeDispatcher(() => TextBlockError.Visibility = Visibility.Hidden));
         }
@@ -80,7 +82,6 @@ namespace HotBoxSoftware
         }
         // Invokes the dispatcher object to access GUI elements from another thread than the main thread
         // Code should be passed to the parameter by using a lambda expression
-        // CODE REFACTORED, THIS METHOD MAY BE REDUNDANT
         public void InvokeDispatcher(Action codetoexecute)
         {
             Dispatcher.BeginInvoke(DispatcherPriority.Normal,
@@ -132,8 +133,11 @@ namespace HotBoxSoftware
 
         private void Minutes_TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Minutes_TextBox.Text = facade.GetViewLogic().GetValidInteger(Minutes_TextBox.Text,6);
+            var validInteger = facade.GetViewLogic().GetValidIntegerAsString(Minutes_TextBox.Text, 5);
+            Minutes_TextBox.Text = validInteger;
             Minutes_TextBox.SelectionStart = Minutes_TextBox.Text.Length;
+            if (Time_TextBlock != null)
+                Time_TextBlock.Text = "("+facade.GetViewLogic().MinutesToTimeText(Convert.ToInt32(validInteger))+")";
         }
     }
 }

@@ -8,12 +8,14 @@
         Title="ValueChartWindow" Height="500" Width="1000">
     <Viewbox StretchDirection="Both" Stretch="Fill">
         <Canvas Height="150" Width="400" Name="myCanvas">
+            <TextBlock FontSize="8"  Name="Unit_TextBlock" FontStyle="Italic" Margin="10"/>
             <TextBlock Visibility="Hidden" Name="NoValues_Textblock" Margin="50">No values were found</TextBlock>
             <Polyline Name="yLine" Style="{StaticResource yChartStyle}"/>
             <Polyline Name="xLine" Style="{StaticResource xChartStyle}"></Polyline>
             <!--DELETE THIS POLYLINE ON DEPLOYMENT-->
             <Polyline Name="ValueChart" 
                       Style="{StaticResource ChartValueStyle}"/>
+            <TextBlock FontSize="8" FontStyle="Italic"  HorizontalAlignment="Right" VerticalAlignment="Bottom" Canvas.Left="355" Canvas.Top="135">Minutes</TextBlock>
         </Canvas>
     </Viewbox>
 </Window>

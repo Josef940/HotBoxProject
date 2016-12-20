@@ -96,7 +96,7 @@ namespace HotBox.BLL.Business_Logic
             {
                 if (item.Module == newValues[newValuesCount].Module)
                 {
-                    newValues[newValuesCount].valueDifference = Convert.ToDecimal(newValues[newValuesCount].Value) - Convert.ToDecimal(item.Value);
+                    newValues[newValuesCount].ValueDifference = Convert.ToDecimal(newValues[newValuesCount].Value) - Convert.ToDecimal(item.Value);
                     newValuesCount++;
                 }
             }

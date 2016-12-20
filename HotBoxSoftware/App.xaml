@@ -23,7 +23,7 @@
         <Style x:Key="ChartValueStyle" TargetType="Polyline">
             <Setter Property="Margin" Value="{Binding Source={StaticResource leftMargin}}"/>
             <Setter Property="Stroke" Value="Blue"/>
-            <Setter Property="StrokeThickness" Value="2"/>
+            <Setter Property="StrokeThickness" Value="1"/>
         </Style>
         <!--.-->
         <Style x:Key="RowStyleWithAlternation" TargetType="DataGridRow">

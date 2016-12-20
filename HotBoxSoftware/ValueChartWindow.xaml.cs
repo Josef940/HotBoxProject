@@ -39,7 +39,7 @@ namespace HotBoxSoftware
             InitializeComponent();
             this.pointName = hbvalues.Module;
             // DELETE NEXT LINE
-            //pointName = "P2";
+            pointName = "P2";
             this.minutes = minutes;
             //
             xLength = xLine.Points[1].X;
@@ -56,6 +56,7 @@ namespace HotBoxSoftware
                 ValueChart.Points = pointvalues.PointCollection;
                 yDivisor = pointvalues.yDivisor;
                 xDivisor = pointvalues.xDivisor;
+                Unit_TextBlock.Text = hbvalues.Unit;
                 //SetChartPoints();
                 SetChartLineValues();
             }

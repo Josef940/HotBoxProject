@@ -13,6 +13,6 @@ namespace HotBox.BLL.Business_Entities
        public string Label { get; set; }
        public double Value { get; set; }
        public string Unit { get; set; }
-       public decimal? valueDifference { get; set; }
+       public decimal? ValueDifference { get; set; }
     }
 }
