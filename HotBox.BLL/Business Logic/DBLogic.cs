@@ -19,7 +19,8 @@ namespace HotBox.BLL.Business_Logic
         {
             List<PointValue> values = new List<PointValue>();
             var dbpoints = facade.GetDBBridge().GetLatestPointValues(pointname, minutes);
-
+            if (dbpoints == null)
+                return null;
             foreach (var item in dbpoints)
                 values.Add(facade.GetBEConverter().PointValueConverter(item));
 

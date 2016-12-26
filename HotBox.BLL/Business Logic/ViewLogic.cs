@@ -30,14 +30,18 @@ namespace HotBox.BLL.Business_Logic
                     startZeroesEnded = true;
                 indexToRemove++;
             }
+            
+            var output = StringBuilderMaxLengthToString(stringBuilder,maxLength);
+            return output;
+        }
 
+        public string StringBuilderMaxLengthToString(StringBuilder stringBuilder, int maxLength)
+        {
             if (stringBuilder.Length > maxLength)
                 stringBuilder.Remove(maxLength, stringBuilder.Length - maxLength);
             else if (stringBuilder.Length == 0 || stringBuilder.Equals("0"))
                 return "0";
-
-            var output = stringBuilder.ToString();
-            return output;
+            return stringBuilder.ToString();
         }
 
         public string MinutesToTimeText(int minutes)

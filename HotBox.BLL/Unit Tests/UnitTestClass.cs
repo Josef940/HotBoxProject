@@ -175,7 +175,24 @@ namespace HotBox.BLL.Unit_Tests
         }
 
         [Test]
-        public void TextIsValidTextBoxInteger()
+        public void Remove_Correct_Characters_Test()
+        {
+            var stringBuilder1 = new StringBuilder();
+            stringBuilder1.Append("Some weird text");
+            var stringBuilder2 = new StringBuilder();
+            stringBuilder2.Append("This is a test-text");
+            var stringBuilder3 = new StringBuilder();
+
+            var string1 = facade.GetViewLogic().StringBuilderMaxLengthToString(stringBuilder1,6);
+            var string2 = facade.GetViewLogic().StringBuilderMaxLengthToString(stringBuilder2, 7);
+            var string3 = facade.GetViewLogic().StringBuilderMaxLengthToString(stringBuilder3, 10);
+            Assert.AreEqual("Some w",string1);
+            Assert.AreEqual("This is", string2);
+            Assert.AreEqual("0", string3);
+        }
+
+        [Test]
+        public void Text_Is_Valid_TextBox_Integer_Test()
         {
             var string1 = "2019q";
             var string2 = "201ikdoj0";
