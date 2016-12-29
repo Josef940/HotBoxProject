@@ -22,30 +22,9 @@ namespace HotBox.BLL.Business_Logic
             get
             {
                 if(instance == null)
-                {
                     instance = new Facade();
-                }
                 return instance;
             }
-        }
-
-
-        private static DAL.HttpGateway DALHttpGateway;
-        public DAL.HttpGateway GetDALHttpGateway()
-        {
-            if (DALHttpGateway == null)
-                DALHttpGateway = new DAL.HttpGateway();
-
-                return DALHttpGateway;
-        }
-
-        private static DAL.HotboxDB.DBGetData PointRepository;
-        public DAL.HotboxDB.DBGetData GetPointRepository()
-        {
-            if (PointRepository == null)
-                PointRepository = new DAL.HotboxDB.DBGetData();
-
-            return PointRepository;
         }
 
         private static XMLLogic datalogic;

@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FacadeDAL.cs" />
     <Compile Include="HotboxDB\DBGetData.cs" />
     <Compile Include="HotboxDB\HotboxData.Context.cs">
       <AutoGen>True</AutoGen>
@@ -84,7 +85,7 @@
     <Compile Include="HotboxDB\tblStrategy.cs">
       <DependentUpon>HotboxData.tt</DependentUpon>
     </Compile>
-    <Compile Include="HttpGateway.cs" />
+    <Compile Include="HotboxXML\HttpGateway.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

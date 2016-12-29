@@ -4,27 +4,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HotBox.DAL;
-using HotBox.BLL.Business_Entities;
 using HotBox.BLL.Business_Logic;
 using System.Net.Http;
+using HotBox.BLL.Business_Entities.XMLViewModels;
 
 namespace HotBox.BLL.Business_Logic
 {
     public class DataXMLBridge
     {
         Facade facade = Facade.Instance;
+        FacadeDAL facadedal = FacadeDAL.Instance;
 
         //Returns the data from a HotBox Http(XML) response
         public Hotbox GetHotBoxData()
         {
-            var hotboxxml = facade.GetDALHttpGateway().GetHotBoxXML();
+            var hotboxxml = facadedal.GetDALHttpGateway().GetHotBoxXML();
             Hotbox hotboxdata = facade.GetDataLogic().XMLSerializeToHotbox(hotboxxml);
             return hotboxdata;
         }
 
         public Hotbox GetWriteableHotBoxData()
         {
-            var hotboxxml = facade.GetDALHttpGateway().GetWriteableHotBoxXML();
+            var hotboxxml = facadedal.GetDALHttpGateway().GetWriteableHotBoxXML();
             Hotbox hotboxdata = facade.GetDataLogic().XMLSerializeToHotbox(hotboxxml);
             return hotboxdata;
         }
@@ -45,7 +46,7 @@ namespace HotBox.BLL.Business_Logic
         public bool PostHotBoxValue(string modulename, string value)
         {
             value = value.Replace(",",".");
-            var hotboxxml = facade.GetDALHttpGateway().PostHotBoxValue(modulename,value);
+            var hotboxxml = facadedal.GetDALHttpGateway().PostHotBoxValue(modulename,value);
             Hotbox hotboxdata = facade.GetDataLogic().XMLSerializeToHotbox(hotboxxml);
             try{
                 if (hotboxdata != null && hotboxdata.Site.Lan.Device.ServiceResponse.Type == "Acknowledge - Write was OK")

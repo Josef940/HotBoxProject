@@ -17,6 +17,7 @@ using HotBox.BLL.Business_Entities;
 using HotBox.BLL.Business_Logic;
 using System.Threading;
 using System.Windows.Threading;
+using HotBox.BLL.Business_Entities.ViewModels;
 
 namespace HotBoxSoftware
 {

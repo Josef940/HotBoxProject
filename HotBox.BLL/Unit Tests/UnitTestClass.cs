@@ -1,5 +1,7 @@
 ﻿using HotBox.BLL.Business_Entities;
 using HotBox.BLL.Business_Entities.DBViewModels;
+using HotBox.BLL.Business_Entities.ViewModels;
+using HotBox.BLL.Business_Entities.XMLViewModels;
 using HotBox.BLL.Business_Logic;
 using NUnit.Framework;
 using System;

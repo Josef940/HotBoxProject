@@ -1,5 +1,6 @@
 ﻿using HotBox.BLL.Business_Entities;
 using HotBox.BLL.Business_Entities.DBViewModels;
+using HotBox.BLL.Business_Entities.ViewModels;
 using HotBox.BLL.Business_Logic;
 using System;
 using System.Collections.Generic;

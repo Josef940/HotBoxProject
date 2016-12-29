@@ -1,4 +1,5 @@
-﻿using HotBox.BLL.Business_Entities;
+﻿using HotBox.BLL.Business_Entities.ViewModels;
+using HotBox.BLL.Business_Entities.XMLViewModels;
 using System;
 using System.Collections.Generic;
 using System.Globalization;

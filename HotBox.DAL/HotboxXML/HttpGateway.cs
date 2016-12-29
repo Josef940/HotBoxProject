@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using System.Xml.Serialization;
 
-namespace HotBox.DAL
+namespace HotBox.DAL.HotboxXML
 {
     public class HttpGateway
     {

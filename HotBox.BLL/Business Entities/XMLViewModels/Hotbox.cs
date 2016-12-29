@@ -7,7 +7,7 @@ using System.Runtime.Serialization;
 using System.Xml.Serialization;
 using System.ServiceModel;
 
-namespace HotBox.BLL.Business_Entities
+namespace HotBox.BLL.Business_Entities.XMLViewModels
 {
     [XmlRoot(ElementName ="TrendProject")]
     public class Hotbox
