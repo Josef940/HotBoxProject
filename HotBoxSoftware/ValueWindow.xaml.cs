@@ -37,7 +37,7 @@ namespace HotBoxSoftware
 
         private void Apply_Click(object sender, RoutedEventArgs e)
         {
-            if (facade.GetDataLogic().ValueIsADouble(TextBoxValue.Text))
+            if (facade.GetXMLLogic().ValueIsADouble(TextBoxValue.Text))
             {
                 if (facade.GetDataXMLBridge().PostHotBoxValue(hotboxvalues.Module, TextBoxValue.Text))
                 {

@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="077a6c99-ba0a-4e4b-83fb-782b17286425" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/LayerDesigner">
+  <layers>
+    <layer Id="cb7019de-c7f1-4931-a111-320f2a39ae90" name="HotBox.BLL">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="01b36caf-9fb9-4469-b065-168937c7cedc" direction="Forward">
+          <layerMoniker Id="5cfc4b29-10dd-4c97-8bd1-8126405f7031" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="37cd1572-d28f-4996-a2e8-b60314cc51a4" direction="Forward">
+          <layerMoniker Id="892c91c2-f888-45bc-95af-85c01a4e5a29" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="ff3f4b61-e7a3-434d-b47c-527f593c132d" direction="Forward">
+          <layerMoniker Id="42147010-7f4b-4f08-9d7d-0dc73e1802b7" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <childLayers>
+        <layer Id="c46df902-26a2-4a18-acbe-498e645e651e" name="Business Entities (View models)">
+          <references>
+            <reference Id="34c8fb28-f09c-493a-888f-d117e0ce1d73" name="Business Entities">
+              <ArtifactNode Label="Business Entities" Category="CodeSchema_ProjectItem" Id="(Assembly=&quot;$(PersonalUri)/Visual Studio 2015/Projects/HotBoxSoftware/HotBox.BLL/HotBox.BLL.csproj&quot; File=&quot;$(PersonalUri)/Visual Studio 2015/Projects/HotBoxSoftware/HotBox.BLL/Business Entities/&quot;)">
+                <Category Ref="ProjectFolder" />
+              </ArtifactNode>
+              <ExpandedNode Id="(Assembly=HotBox.BLL Namespace=HotBox.BLL.Business_Entities.DBViewModels Type=PointValue)" Label="PointValue" Category="CodeSchema_Class">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Assembly=HotBox.BLL Namespace=HotBox.BLL.Business_Entities.ViewModels Type=HotBoxValues)" Label="HotBoxValues" Category="CodeSchema_Class">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Assembly=HotBox.BLL Namespace=HotBox.BLL.Business_Entities.ViewModels Type=PointCollectionAndDivisor)" Label="PointCollectionAndDivisor" Category="CodeSchema_Class">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+      </childLayers>
+      <references>
+        <reference Id="b1d3a9aa-a760-4281-8c88-4005e639ea80" name="HotBox.BLL.dll">
+          <ArtifactNode Label="HotBox.BLL.dll" Category="CodeSchema_Assembly" Id="(Assembly=&quot;$(PersonalUri)/Visual Studio 2015/Projects/HotBoxSoftware/HotBox.BLL/bin/Debug/HotBox.BLL.dll&quot;)" />
+          <ExpandedNode Id="(Assembly=HotBox.BLL)" Label="HotBox.BLL.dll" Category="CodeSchema_Assembly">
+            <Category Ref="FileSystem.Category.FileOfType.dll" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+        <reference Id="d17dd212-6dbe-4525-a53d-6f923137a1cf" name="HotBox.BLL.Business_Logic">
+          <ArtifactNode Label="HotBox.BLL.Business_Logic" Category="CodeSchema_Namespace" Id="(Namespace=HotBox.BLL.Business_Logic)" />
+          <ExpandedNode Id="(Namespace=HotBox.BLL.Business_Logic)" Label="HotBox.BLL.Business_Logic" Category="CodeSchema_Namespace">
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+        <reference Id="85065698-0e81-43d4-b409-c5abec28d073" name="Business Logic1">
+          <ArtifactNode Label="Business Logic" Category="CodeSchema_ProjectItem" Id="(Assembly=&quot;$(PersonalUri)/Visual Studio 2015/Projects/HotBoxSoftware/HotBox.BLL/HotBox.BLL.csproj&quot; File=&quot;$(PersonalUri)/Visual Studio 2015/Projects/HotBoxSoftware/HotBox.BLL/Business Logic/&quot;)">
+            <Category Ref="ProjectFolder" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=HotBox.BLL Namespace=HotBox.BLL.Business_Logic Type=BEConverter)" Label="BEConverter" Category="CodeSchema_Class">
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+          <ExpandedNode Id="(Assembly=HotBox.BLL Namespace=HotBox.BLL.Business_Logic Type=DatabaseBridge)" Label="DatabaseBridge" Category="CodeSchema_Class">
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+          <ExpandedNode Id="(Assembly=HotBox.BLL Namespace=HotBox.BLL.Business_Logic Type=DataXMLBridge)" Label="DataXMLBridge" Category="CodeSchema_Class">
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+          <ExpandedNode Id="(Assembly=HotBox.BLL Namespace=HotBox.BLL.Business_Logic Type=DBLogic)" Label="DBLogic" Category="CodeSchema_Class">
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+          <ExpandedNode Id="(Assembly=HotBox.BLL Namespace=HotBox.BLL.Business_Logic Type=Facade)" Label="Facade" Category="CodeSchema_Class">
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+          <ExpandedNode Id="(Assembly=HotBox.BLL Namespace=HotBox.BLL.Business_Logic Type=ViewLogic)" Label="ViewLogic" Category="CodeSchema_Class">
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+          <ExpandedNode Id="(Assembly=HotBox.BLL Namespace=HotBox.BLL.Business_Logic Type=XMLLogic)" Label="XMLLogic" Category="CodeSchema_Class">
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="eb7d9f6e-fc32-4e6d-ae79-f170281f8c52" name="HotBox.UI">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="29c29907-0d41-4e7b-97fd-43e76e86a874" direction="Forward">
+          <layerMoniker Id="cb7019de-c7f1-4931-a111-320f2a39ae90" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="f6d6ba75-069e-4233-9180-4a075500c024" direction="Forward">
+          <layerMoniker Id="c46df902-26a2-4a18-acbe-498e645e651e" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="526c96ba-174a-44a5-9cc4-e7a3de906896" name="HotBoxSoftware.exe">
+          <ArtifactNode Label="HotBoxSoftware.exe" Category="CodeSchema_Assembly" Id="(Assembly=&quot;$(PersonalUri)/Visual Studio 2015/Projects/HotBoxSoftware/HotBoxSoftware/bin/Debug/HotBoxSoftware.exe&quot;)" />
+          <ExpandedNode Id="(Assembly=HotBoxSoftware)" Label="HotBoxSoftware.exe" Category="CodeSchema_Assembly">
+            <Category Ref="FileSystem.Category.FileOfType.exe" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="5cfc4b29-10dd-4c97-8bd1-8126405f7031" name="HotBox.DAL">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="332c96ea-394a-4305-a224-401134c1e14e" direction="Forward">
+          <layerMoniker Id="a4e1f4ac-cce4-4cc8-874f-6045f290530b" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <childLayers>
+        <layer Id="892c91c2-f888-45bc-95af-85c01a4e5a29" name="Hotbox (XML data)">
+          <references>
+            <reference Id="f58ad670-bb41-48ae-ad33-ba50586f5cfd" name="Hotbox.cs">
+              <ArtifactNode Label="Hotbox.cs" Category="CodeSchema_ProjectItem" Id="(Assembly=&quot;$(PersonalUri)/Visual Studio 2015/Projects/HotBoxSoftware/HotBox.DAL/HotBox.DAL.csproj&quot; File=&quot;$(PersonalUri)/Visual Studio 2015/Projects/HotBoxSoftware/HotBox.DAL/HotboxXML/Hotbox.cs&quot;)">
+                <Category Ref="File" />
+              </ArtifactNode>
+              <ExpandedNode Id="(Assembly=HotBox.DAL Namespace=HotBox.DAL.HotboxXML Type=Param)" Label="Param" Category="CodeSchema_Class">
+                <LinkCategory Ref="Contains" />
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Assembly=HotBox.DAL Namespace=HotBox.DAL.HotboxXML Type=Module)" Label="Module" Category="CodeSchema_Class">
+                <LinkCategory Ref="Contains" />
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Assembly=HotBox.DAL Namespace=HotBox.DAL.HotboxXML Type=DeviceOverview)" Label="DeviceOverview" Category="CodeSchema_Class">
+                <LinkCategory Ref="Contains" />
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Assembly=HotBox.DAL Namespace=HotBox.DAL.HotboxXML Type=ServiceResponse)" Label="ServiceResponse" Category="CodeSchema_Class">
+                <LinkCategory Ref="Contains" />
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Assembly=HotBox.DAL Namespace=HotBox.DAL.HotboxXML Type=Device)" Label="Device" Category="CodeSchema_Class">
+                <LinkCategory Ref="Contains" />
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Assembly=HotBox.DAL Namespace=HotBox.DAL.HotboxXML Type=Lan)" Label="Lan" Category="CodeSchema_Class">
+                <LinkCategory Ref="Contains" />
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Assembly=HotBox.DAL Namespace=HotBox.DAL.HotboxXML Type=Site)" Label="Site" Category="CodeSchema_Class">
+                <LinkCategory Ref="Contains" />
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Assembly=HotBox.DAL Namespace=HotBox.DAL.HotboxXML Type=Hotbox)" Label="Hotbox" Category="CodeSchema_Class">
+                <LinkCategory Ref="Contains" />
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+        <layer Id="42147010-7f4b-4f08-9d7d-0dc73e1802b7" name="Hotbox (DB data)">
+          <references>
+            <reference Id="c8c50a82-d7bb-439e-98e5-ac88f05bc933" name="HotboxData.edmx">
+              <ArtifactNode Label="HotboxData.edmx" Category="CodeSchema_ProjectItem" Id="(Assembly=&quot;$(PersonalUri)/Visual Studio 2015/Projects/HotBoxSoftware/HotBox.DAL/HotBox.DAL.csproj&quot; File=&quot;$(PersonalUri)/Visual Studio 2015/Projects/HotBoxSoftware/HotBox.DAL/HotboxDB/HotboxData.edmx&quot;)">
+                <Category Ref="File" />
+              </ArtifactNode>
+              <ExpandedNode Id="(Assembly=HotBox.DAL Namespace=HotBox.DAL.HotboxDB Type=HOTBOXDBEntities)" Label="HOTBOXDBEntities" Category="CodeSchema_Class">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Assembly=HotBox.DAL Namespace=HotBox.DAL.HotboxDB Type=tblOutstation)" Label="tblOutstation" Category="CodeSchema_Class">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Assembly=HotBox.DAL Namespace=HotBox.DAL.HotboxDB Type=tblPointValue)" Label="tblPointValue" Category="CodeSchema_Class">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Assembly=HotBox.DAL Namespace=HotBox.DAL.HotboxDB Type=tblStrategy)" Label="tblStrategy" Category="CodeSchema_Class">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+            <reference Id="14247900-6e03-4954-b6e5-c954ca710364" name="HotboxData.Context.tt">
+              <ArtifactNode Label="HotboxData.Context.tt" Category="CodeSchema_ProjectItem" Id="(Assembly=&quot;$(PersonalUri)/Visual Studio 2015/Projects/HotBoxSoftware/HotBox.DAL/HotBox.DAL.csproj&quot; File=&quot;$(PersonalUri)/Visual Studio 2015/Projects/HotBoxSoftware/HotBox.DAL/HotboxDB/HotboxData.Context.tt&quot;)">
+                <Category Ref="File" />
+              </ArtifactNode>
+              <ExpandedNode Id="(Assembly=HotBox.DAL Namespace=HotBox.DAL.HotboxDB Type=HOTBOXDBEntities)" Label="HOTBOXDBEntities" Category="CodeSchema_Class">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+            <reference Id="36ddfe61-3270-4c65-b1f5-2dfb59be82e3" name="HotboxData.Context.cs">
+              <ArtifactNode Label="HotboxData.Context.cs" Category="CodeSchema_ProjectItem" Id="(Assembly=&quot;$(PersonalUri)/Visual Studio 2015/Projects/HotBoxSoftware/HotBox.DAL/HotBox.DAL.csproj&quot; File=&quot;$(PersonalUri)/Visual Studio 2015/Projects/HotBoxSoftware/HotBox.DAL/HotboxDB/HotboxData.Context.cs&quot;)">
+                <Category Ref="File" />
+              </ArtifactNode>
+              <ExpandedNode Id="(Assembly=HotBox.DAL Namespace=HotBox.DAL.HotboxDB Type=HOTBOXDBEntities)" Label="HOTBOXDBEntities" Category="CodeSchema_Class">
+                <LinkCategory Ref="Contains" />
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+            <reference Id="7f6b7ef2-ecd0-4974-9b58-56e9b6871e2d" name="HotboxData.Designer.cs">
+              <ArtifactNode Label="HotboxData.Designer.cs" Category="CodeSchema_ProjectItem" Id="(Assembly=&quot;$(PersonalUri)/Visual Studio 2015/Projects/HotBoxSoftware/HotBox.DAL/HotBox.DAL.csproj&quot; File=&quot;$(PersonalUri)/Visual Studio 2015/Projects/HotBoxSoftware/HotBox.DAL/HotboxDB/HotboxData.Designer.cs&quot;)">
+                <Category Ref="File" />
+              </ArtifactNode>
+            </reference>
+            <reference Id="13372fc6-9b29-412b-a241-a3e385670bb4" name="HotboxData.edmx.diagram">
+              <ArtifactNode Label="HotboxData.edmx.diagram" Category="CodeSchema_ProjectItem" Id="(Assembly=&quot;$(PersonalUri)/Visual Studio 2015/Projects/HotBoxSoftware/HotBox.DAL/HotBox.DAL.csproj&quot; File=&quot;$(PersonalUri)/Visual Studio 2015/Projects/HotBoxSoftware/HotBox.DAL/HotboxDB/HotboxData.edmx.diagram&quot;)">
+                <Category Ref="File" />
+              </ArtifactNode>
+            </reference>
+            <reference Id="b8472d16-2c72-41c3-a19b-116cf31f47cf" name="HotboxData.tt">
+              <ArtifactNode Label="HotboxData.tt" Category="CodeSchema_ProjectItem" Id="(Assembly=&quot;$(PersonalUri)/Visual Studio 2015/Projects/HotBoxSoftware/HotBox.DAL/HotBox.DAL.csproj&quot; File=&quot;$(PersonalUri)/Visual Studio 2015/Projects/HotBoxSoftware/HotBox.DAL/HotboxDB/HotboxData.tt&quot;)">
+                <Category Ref="File" />
+              </ArtifactNode>
+              <ExpandedNode Id="(Assembly=HotBox.DAL Namespace=HotBox.DAL.HotboxDB Type=tblOutstation)" Label="tblOutstation" Category="CodeSchema_Class">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Assembly=HotBox.DAL Namespace=HotBox.DAL.HotboxDB Type=tblPointValue)" Label="tblPointValue" Category="CodeSchema_Class">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Assembly=HotBox.DAL Namespace=HotBox.DAL.HotboxDB Type=tblStrategy)" Label="tblStrategy" Category="CodeSchema_Class">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+            <reference Id="ed6b78f1-1d51-4e93-831b-4b7b0dab0afd" name="HotboxData.cs">
+              <ArtifactNode Label="HotboxData.cs" Category="CodeSchema_ProjectItem" Id="(Assembly=&quot;$(PersonalUri)/Visual Studio 2015/Projects/HotBoxSoftware/HotBox.DAL/HotBox.DAL.csproj&quot; File=&quot;$(PersonalUri)/Visual Studio 2015/Projects/HotBoxSoftware/HotBox.DAL/HotboxDB/HotboxData.cs&quot;)">
+                <Category Ref="File" />
+              </ArtifactNode>
+            </reference>
+            <reference Id="3f680e15-1fb6-498f-9c1e-31eb7ff8e794" name="tblOutstation.cs">
+              <ArtifactNode Label="tblOutstation.cs" Category="CodeSchema_ProjectItem" Id="(Assembly=&quot;$(PersonalUri)/Visual Studio 2015/Projects/HotBoxSoftware/HotBox.DAL/HotBox.DAL.csproj&quot; File=&quot;$(PersonalUri)/Visual Studio 2015/Projects/HotBoxSoftware/HotBox.DAL/HotboxDB/tblOutstation.cs&quot;)">
+                <Category Ref="File" />
+              </ArtifactNode>
+              <ExpandedNode Id="(Assembly=HotBox.DAL Namespace=HotBox.DAL.HotboxDB Type=tblOutstation)" Label="tblOutstation" Category="CodeSchema_Class">
+                <LinkCategory Ref="Contains" />
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+            <reference Id="dac578ec-6d4e-41f0-acca-5f28ccb22bab" name="tblPointValue.cs">
+              <ArtifactNode Label="tblPointValue.cs" Category="CodeSchema_ProjectItem" Id="(Assembly=&quot;$(PersonalUri)/Visual Studio 2015/Projects/HotBoxSoftware/HotBox.DAL/HotBox.DAL.csproj&quot; File=&quot;$(PersonalUri)/Visual Studio 2015/Projects/HotBoxSoftware/HotBox.DAL/HotboxDB/tblPointValue.cs&quot;)">
+                <Category Ref="File" />
+              </ArtifactNode>
+              <ExpandedNode Id="(Assembly=HotBox.DAL Namespace=HotBox.DAL.HotboxDB Type=tblPointValue)" Label="tblPointValue" Category="CodeSchema_Class">
+                <LinkCategory Ref="Contains" />
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+            <reference Id="a220db55-ebdd-4a6b-9e44-17577f993477" name="tblStrategy.cs">
+              <ArtifactNode Label="tblStrategy.cs" Category="CodeSchema_ProjectItem" Id="(Assembly=&quot;$(PersonalUri)/Visual Studio 2015/Projects/HotBoxSoftware/HotBox.DAL/HotBox.DAL.csproj&quot; File=&quot;$(PersonalUri)/Visual Studio 2015/Projects/HotBoxSoftware/HotBox.DAL/HotboxDB/tblStrategy.cs&quot;)">
+                <Category Ref="File" />
+              </ArtifactNode>
+              <ExpandedNode Id="(Assembly=HotBox.DAL Namespace=HotBox.DAL.HotboxDB Type=tblStrategy)" Label="tblStrategy" Category="CodeSchema_Class">
+                <LinkCategory Ref="Contains" />
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+      </childLayers>
+      <references>
+        <reference Id="6a1e65f6-3bdb-4002-bdc7-55588665e15a" name="HotBox.DAL.dll">
+          <ArtifactNode Label="HotBox.DAL.dll" Category="CodeSchema_Assembly" Id="(Assembly=&quot;$(PersonalUri)/Visual Studio 2015/Projects/HotBoxSoftware/HotBox.DAL/bin/Debug/HotBox.DAL.dll&quot;)" />
+          <ExpandedNode Id="(Assembly=HotBox.DAL)" Label="HotBox.DAL.dll" Category="CodeSchema_Assembly">
+            <Category Ref="FileSystem.Category.FileOfType.dll" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+        <reference Id="da23e7f9-f038-45cb-b828-af8db3e82e61" name="HotBox.DAL.HotboxDB">
+          <ArtifactNode Label="HotBox.DAL.HotboxDB" Category="CodeSchema_Namespace" Id="(Namespace=HotBox.DAL.HotboxDB)" />
+          <ExpandedNode Id="(Namespace=HotBox.DAL.HotboxDB)" Label="HotBox.DAL.HotboxDB" Category="CodeSchema_Namespace">
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+        <reference Id="aa07d9b5-2ab8-491f-9cbb-dbe7453b314a" name="HotBox.DAL.HotboxXML">
+          <ArtifactNode Label="HotBox.DAL.HotboxXML" Category="CodeSchema_Namespace" Id="(Namespace=HotBox.DAL.HotboxXML)" />
+          <ExpandedNode Id="(Namespace=HotBox.DAL.HotboxXML)" Label="HotBox.DAL.HotboxXML" Category="CodeSchema_Namespace">
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="a4e1f4ac-cce4-4cc8-874f-6045f290530b" name="SERVER" />
+  </layers>
+</layerModel>

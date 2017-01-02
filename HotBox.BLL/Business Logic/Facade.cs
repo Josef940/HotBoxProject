@@ -27,13 +27,13 @@ namespace HotBox.BLL.Business_Logic
             }
         }
 
-        private static XMLLogic datalogic;
-        public XMLLogic GetDataLogic()
+        private static XMLLogic xmllogic;
+        public XMLLogic GetXMLLogic()
         {
-            if (datalogic == null)
-                datalogic = new XMLLogic();
+            if (xmllogic == null)
+                xmllogic = new XMLLogic();
 
-            return datalogic;
+            return xmllogic;
         }
 
         private static DataXMLBridge dataxmlbridge;

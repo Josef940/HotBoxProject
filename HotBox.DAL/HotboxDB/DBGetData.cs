@@ -15,8 +15,7 @@ namespace HotBox.DAL.HotboxDB
             {
                 try { 
                 // Gets server DateTime, and reduces it by 'minutes' to get the desired start date
-                var dateQuery = db.Database.SqlQuery<DateTime>("SELECT GETDATE()");
-                var serverDate = dateQuery.AsEnumerable().First();
+                var serverDate = GetServerDate(db);
                 var startDate = serverDate.AddMinutes(-minutes);
 
                 int indexNumber = Convert.ToInt32(db.tblStrategies.Where(x => x.Point == pointname).Select(x => x.theIndex).FirstOrDefault());
@@ -25,10 +24,15 @@ namespace HotBox.DAL.HotboxDB
                 return pointvalues;
                 }
                 catch
-                {
-                    return null;
-                }
+                { return null; }
             }
+        }
+
+        public DateTime GetServerDate(HOTBOXDBEntities db)
+        {
+            var dateRaw = db.Database.SqlQuery<DateTime>("SELECT GETDATE()");
+            var serverDate = dateRaw.AsEnumerable().First();
+            return serverDate;
         }
     }
 }

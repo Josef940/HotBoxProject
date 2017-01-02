@@ -49,7 +49,7 @@ namespace HotBoxSoftware
                 while (true)
                 {
                     InvokeDispatcher(() => TextBlockLoading.Visibility = Visibility.Visible);
-                    bool updated = facade.GetDataLogic().UpdateHotBoxValues(ref hotboxValues, ref writeablehotboxValues);
+                    bool updated = facade.GetXMLLogic().UpdateHotBoxValues(ref hotboxValues, ref writeablehotboxValues);
                     InvokeDispatcher(() => TextBlockLoading.Visibility = Visibility.Hidden);
 
                     if (updated)
@@ -69,8 +69,8 @@ namespace HotBoxSoftware
             {
                 InvokeDispatcher(() => TextBlockError.Visibility = Visibility.Visible);
                 Thread.Sleep(TimeSpan.FromSeconds(ERROR_MESSAGE_SECONDS));
-            })
-                .ContinueWith(_ => InvokeDispatcher(() => TextBlockError.Visibility = Visibility.Hidden));
+                InvokeDispatcher(() => TextBlockError.Visibility = Visibility.Hidden);
+            });
         }
 
         private void RefreshHotBoxDataGrid()
@@ -81,9 +81,9 @@ namespace HotBoxSoftware
             DataGridwriteableModule.Items.Refresh();
             DataGridwriteableModule.Columns.RemoveAt(4);
         }
-        // Invokes the dispatcher object to access GUI elements from another thread than the main thread
+        // Invokes the dispatcher object to access GUI elements from another thread than the main thread.
         // Code should be passed to the parameter by using a lambda expression
-        public void InvokeDispatcher(Action codetoexecute)
+        private void InvokeDispatcher(Action codetoexecute)
         {
             Dispatcher.BeginInvoke(DispatcherPriority.Normal,
                 (ThreadStart)delegate ()

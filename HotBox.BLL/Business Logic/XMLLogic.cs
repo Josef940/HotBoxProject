@@ -1,5 +1,5 @@
 ﻿using HotBox.BLL.Business_Entities.ViewModels;
-using HotBox.BLL.Business_Entities.XMLViewModels;
+using HotBox.DAL.HotboxXML;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -42,27 +42,7 @@ namespace HotBox.BLL.Business_Logic
             return double.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out d);
         }
 
-        // Values in the Params list are converted to a HotBoxValues List
-        // for easier access and front-end implementation.
-        public List<HotBoxValues> GetHotBoxValues(Hotbox hotbox)
-        {
-            if (hotbox == null)
-                return null;
-            List<HotBoxValues> values = new List<HotBoxValues>();
-            foreach (Module item in GetModules(hotbox))
-            {
-                values.Add(new HotBoxValues()
-                {
-                        Module = item.Name,
-                        Label = item.Params[2].Value,
-                        // This parsing method was necessary to maintain the decimal points from the Value string
-                        Value = double.Parse(item.Params[0].Value, CultureInfo.InvariantCulture),
-                        Unit = item.Params[1].Value
-                    });
-                
-            }
-            return values;
-        }
+        
         // Set parameter to 'true
         //public List<HotBoxValues> UpdateHotBoxValues(bool writeable)
         //{
@@ -76,11 +56,11 @@ namespace HotBox.BLL.Business_Logic
         {
             if(hotboxvalues == null)
             {
-                hotboxvalues = GetHotBoxValues(facade.GetDataXMLBridge().GetHotBoxData());
-                writeablehotboxvalues = GetHotBoxValues(facade.GetDataXMLBridge().GetWriteableHotBoxData());
+                hotboxvalues = facade.GetBEConverter().HotboxConverter(facade.GetDataXMLBridge().GetHotBoxData());
+                writeablehotboxvalues = facade.GetBEConverter().HotboxConverter(facade.GetDataXMLBridge().GetWriteableHotBoxData());
             }
-            var newhotboxvalues = GetHotBoxValues(facade.GetDataXMLBridge().GetHotBoxData());
-            var newwriteablehotboxvalues = GetHotBoxValues(facade.GetDataXMLBridge().GetWriteableHotBoxData());
+            var newhotboxvalues = facade.GetBEConverter().HotboxConverter(facade.GetDataXMLBridge().GetHotBoxData());
+            var newwriteablehotboxvalues = facade.GetBEConverter().HotboxConverter(facade.GetDataXMLBridge().GetWriteableHotBoxData());
             if (newhotboxvalues != null && newwriteablehotboxvalues != null)
             {
                 hotboxvalues = SetNewValues(hotboxvalues, newhotboxvalues);
@@ -90,6 +70,7 @@ namespace HotBox.BLL.Business_Logic
             else
                 return false;
         }
+
         public List<HotBoxValues> SetNewValues(List<HotBoxValues> oldValues, List<HotBoxValues> newValues)
         {
             int newValuesCount = 0;
@@ -104,7 +85,6 @@ namespace HotBox.BLL.Business_Logic
             return newValues;
         }
 
-        // Serializes an XML HttpResponse response to a HotBox object if successful
         public Hotbox XMLSerializeToHotbox(HttpResponseMessage response)
         {
             try {

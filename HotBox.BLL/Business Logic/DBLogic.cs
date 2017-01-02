@@ -13,8 +13,8 @@ namespace HotBox.BLL.Business_Logic
     public class DBLogic
     {
         Facade facade = Facade.Instance;
-        readonly int xPositiveLength = 350;
-        readonly int yPositiveLength = 100;
+        const int xPositiveLength = 350;
+        const int yPositiveLength = 100;
         public PointCollectionAndDivisor GetPointValuesForChart(string pointname, int minutes)
         {
             List<PointValue> values = new List<PointValue>();

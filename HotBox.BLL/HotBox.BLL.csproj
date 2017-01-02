@@ -60,7 +60,6 @@
   <ItemGroup>
     <Compile Include="Business Entities\DBViewModels\PointValue.cs" />
     <Compile Include="Business Entities\ViewModels\HotBoxValues.cs" />
-    <Compile Include="Business Entities\XMLViewModels\Hotbox.cs" />
     <Compile Include="Business Entities\ViewModels\PointCollectionAndDivisor.cs" />
     <Compile Include="Business Logic\BEConverter.cs" />
     <Compile Include="Business Logic\DatabaseBridge.cs" />

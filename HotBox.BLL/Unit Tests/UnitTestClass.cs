@@ -1,8 +1,8 @@
 ﻿using HotBox.BLL.Business_Entities;
 using HotBox.BLL.Business_Entities.DBViewModels;
 using HotBox.BLL.Business_Entities.ViewModels;
-using HotBox.BLL.Business_Entities.XMLViewModels;
 using HotBox.BLL.Business_Logic;
+using HotBox.DAL.HotboxXML;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -31,13 +31,13 @@ namespace HotBox.BLL.Unit_Tests
         public void Serializes_XML_To_HotBox_Test()
         {
             HttpResponseMessage validresponse = CreateResponseMessage();
-            Hotbox validhotboxdata = facade.GetDataLogic().XMLSerializeToHotbox(validresponse);
+            Hotbox validhotboxdata = facade.GetXMLLogic().XMLSerializeToHotbox(validresponse);
             // 71 is the CncAddress attribute value in the XMLString.txt file
             Assert.AreEqual(71, validhotboxdata.Site.CncAddress);
 
             // Returns null if response cannot be serialized
             HttpResponseMessage invalidresponse = CreateResponseMessage();
-            Hotbox invalidhotboxdata = facade.GetDataLogic().XMLSerializeToHotbox(validresponse);
+            Hotbox invalidhotboxdata = facade.GetXMLLogic().XMLSerializeToHotbox(validresponse);
             Assert.AreEqual(null,invalidhotboxdata);
 
         }
@@ -45,8 +45,8 @@ namespace HotBox.BLL.Unit_Tests
         public void Retrieving_Values_From_HotBox_Test()
         {
             HttpResponseMessage response = CreateResponseMessage();
-            Hotbox hotboxdata = facade.GetDataLogic().XMLSerializeToHotbox(response);
-            List<HotBoxValues> hbvalues = facade.GetDataLogic().GetHotBoxValues(hotboxdata);
+            Hotbox hotboxdata = facade.GetXMLLogic().XMLSerializeToHotbox(response);
+            List<HotBoxValues> hbvalues = facade.GetBEConverter().HotboxConverter(hotboxdata);
 
             Assert.AreEqual((double)1963848,hbvalues[0].Value);
         }
@@ -54,8 +54,8 @@ namespace HotBox.BLL.Unit_Tests
         public void Get_Modules_From_HotBox_Test()
         {
             HttpResponseMessage response = CreateResponseMessage();
-            Hotbox hotboxdata = facade.GetDataLogic().XMLSerializeToHotbox(response);
-            List<Module> modules = facade.GetDataLogic().GetModules(hotboxdata);
+            Hotbox hotboxdata = facade.GetXMLLogic().XMLSerializeToHotbox(response);
+            List<Module> modules = facade.GetXMLLogic().GetModules(hotboxdata);
 
             Assert.AreEqual("S100",modules[0].Name);
         }
@@ -70,12 +70,12 @@ namespace HotBox.BLL.Unit_Tests
             string number5 = "344,02";
             string number6 = "3qde4qw3";
 
-            Assert.AreEqual(true,facade.GetDataLogic().ValueIsADouble(number1));
-            Assert.AreEqual(true, facade.GetDataLogic().ValueIsADouble(number2));
-            Assert.AreEqual(false, facade.GetDataLogic().ValueIsADouble(number3));
-            Assert.AreEqual(false, facade.GetDataLogic().ValueIsADouble(number4));
-            Assert.AreEqual(true, facade.GetDataLogic().ValueIsADouble(number5));
-            Assert.AreEqual(false, facade.GetDataLogic().ValueIsADouble(number6));
+            Assert.AreEqual(true,facade.GetXMLLogic().ValueIsADouble(number1));
+            Assert.AreEqual(true, facade.GetXMLLogic().ValueIsADouble(number2));
+            Assert.AreEqual(false, facade.GetXMLLogic().ValueIsADouble(number3));
+            Assert.AreEqual(false, facade.GetXMLLogic().ValueIsADouble(number4));
+            Assert.AreEqual(true, facade.GetXMLLogic().ValueIsADouble(number5));
+            Assert.AreEqual(false, facade.GetXMLLogic().ValueIsADouble(number6));
         }
 
         [Test]
@@ -85,7 +85,7 @@ namespace HotBox.BLL.Unit_Tests
             List<HotBoxValues> newboxvalues = new List<HotBoxValues>();
             oldboxvalues.Add(new HotBoxValues { Module="SomeModule", Label="SomeLabel", Unit="SomeUnit", Value=5, ValueDifference=null});
             newboxvalues.Add(new HotBoxValues { Module = "SomeModule", Label = "SomeLabel", Unit = "SomeUnit", Value = 7, ValueDifference = null });
-            var returnedlist = facade.GetDataLogic().SetNewValues(oldboxvalues,newboxvalues);
+            var returnedlist = facade.GetXMLLogic().SetNewValues(oldboxvalues,newboxvalues);
             Assert.AreEqual(2,returnedlist[0].ValueDifference);
         }
 

@@ -51,6 +51,7 @@
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -85,6 +86,7 @@
     <Compile Include="HotboxDB\tblStrategy.cs">
       <DependentUpon>HotboxData.tt</DependentUpon>
     </Compile>
+    <Compile Include="HotboxXML\Hotbox.cs" />
     <Compile Include="HotboxXML\HttpGateway.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
