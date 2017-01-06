@@ -11,7 +11,7 @@ namespace HotBox.DAL.HotboxXML
     public class HttpGateway
     {
         private const string KEY = "FF3F390D";
-
+        private const string IP = "10.176.131.250";
         // FOR DEVELOPMENT OUTSIDE SCHOOL --------------
         //private string HotBoxReadURI = "http://norrelundparken.se-bb.dk/ws/tsite.xml?Type=Read&Key=ABCDEF&Request=S100-200(V,%25,$)";
         //private string WriteableHotBoxReadURI = "http://norrelundparken.se-bb.dk/ws/tsite.xml?Type=Read&Request=K1-300(V,%25,$)";
@@ -28,6 +28,10 @@ namespace HotBox.DAL.HotboxXML
         {
             return String.Format("http://10.176.131.250/ws/tsite.xml?Type=Write&Key={0}&Request={1}(V={2})", KEY, modulename, value);
         }
+        private string PtoS(string p)
+        {
+            return String.Format("http://10.176.131.250/ws/tsite.xml/Type=Read&Request={0}(Sc)",p);
+        }
         // ----------------------------
 
 
@@ -41,6 +45,20 @@ namespace HotBox.DAL.HotboxXML
                     return response;
                 }
                 catch{ return null;}
+            }
+        }
+
+        public HttpResponseMessage GetPtoS(string p)
+        {
+            using(var client = new HttpClient())
+            {
+                try
+                {
+                    HttpResponseMessage response =
+                        client.GetAsync(PtoS(p)).Result;
+                    return response;
+                }
+                catch { return null; }
             }
         }
 

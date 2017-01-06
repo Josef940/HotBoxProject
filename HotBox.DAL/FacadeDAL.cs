@@ -32,13 +32,13 @@ namespace HotBox.DAL
             return DALHttpGateway;
         }
 
-        private static DBGetData PointRepository;
-        public DBGetData GetPointRepository()
+        private static DBGetData DBRepository;
+        public DBGetData GetDBRepository()
         {
-            if (PointRepository == null)
-                PointRepository = new DBGetData();
+            if (DBRepository == null)
+                DBRepository = new DBGetData();
 
-            return PointRepository;
+            return DBRepository;
         }
     }
 }

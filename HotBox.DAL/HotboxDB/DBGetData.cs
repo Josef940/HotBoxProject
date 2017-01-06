@@ -34,5 +34,20 @@ namespace HotBox.DAL.HotboxDB
             var serverDate = dateRaw.AsEnumerable().First();
             return serverDate;
         }
+
+        public List<tblStrategy> GetPValues()
+        {
+            using (var db = new HOTBOXDBEntities())
+            {
+                try
+                {
+                    var pvalues = db.tblStrategies.Where(x => x.Point.StartsWith("P")).ToList();
+                    return pvalues;
+                }
+                catch
+                { return null; }
+            }
+        }
+
     }
 }

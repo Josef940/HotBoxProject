@@ -15,8 +15,15 @@ namespace HotBox.BLL.Business_Logic
 
         public List<tblPointValue> GetLatestPointValues(string pointname, int minutes)
         {
-            var dbpointvalues = facadedal.GetPointRepository().GetValuesFromTime(pointname, minutes);
+            var dbpointvalues = facadedal.GetDBRepository().GetValuesFromTime(pointname, minutes);
             return dbpointvalues;
         }
+
+        public List<tblStrategy> PPoints()
+        {
+            var pPoints = facadedal.GetDBRepository().GetPValues();
+            return pPoints;
+        }
     }
+
 }
