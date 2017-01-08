@@ -8,6 +8,7 @@ using HotBox.BLL.Business_Logic;
 using System.Net.Http;
 using HotBox.DAL.HotboxXML;
 using HotBox.DAL.HotboxDB;
+using System.IO;
 
 namespace HotBox.BLL.Business_Logic
 {
@@ -50,18 +51,22 @@ namespace HotBox.BLL.Business_Logic
             }
         }
 
-        public Dictionary<string, string> PtoSDictionary()
+        public Dictionary<string, string> StoPDictionary()
         {
             Dictionary<string, string> dict = new Dictionary<string, string>();
             var ppoints = facade.GetDBBridge().PPoints();
             if (ppoints == null)
                 return null;
-            foreach(var item in ppoints)
+            foreach (var item in ppoints)
             {
-                var svalue = facadedal.GetDALHttpGateway().GetPtoS(item.Point).Content.ToString();
-                if (svalue == null)
+                var SValue = facade.GetXMLLogic().XMLSerializeSValue(facadedal.GetDALHttpGateway().GetPtoS(item.Point));
+                if (SValue == null)
                     return null;
-                dict.Add(item.Point,svalue);
+                var s = SValue.Site.Lan.Device.Modules[0].Params[0].ConEndPoint;
+                s = s.Remove(s.Length - 1);
+
+                var ppoint = (item.Point) != null ? item.Point : "";
+                dict.Add(s, ppoint);
             }
             return dict;
         }

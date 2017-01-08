@@ -30,7 +30,7 @@ namespace HotBoxSoftware
         List<HotBoxValues> hotboxValues = null;
         List<HotBoxValues> writeablehotboxValues = null;
         readonly int UPDATE_SECONDS = 15;
-
+        Dictionary<string, string> SPdictionary = null;
         // Amount of seconds the error message will show on the screen
         readonly int ERROR_MESSAGE_SECONDS = 12;
         public MainWindow()
@@ -51,7 +51,8 @@ namespace HotBoxSoftware
                     InvokeDispatcher(() => TextBlockLoading.Visibility = Visibility.Visible);
                     bool updated = facade.GetXMLLogic().UpdateHotBoxValues(ref hotboxValues, ref writeablehotboxValues);
                     InvokeDispatcher(() => TextBlockLoading.Visibility = Visibility.Hidden);
-
+                    if (SPdictionary == null)
+                        PopulateSPdictionary();
                     if (updated)
                         InvokeDispatcher(() => RefreshHotBoxDataGrid());
                     else
@@ -59,6 +60,14 @@ namespace HotBoxSoftware
                     Thread.Sleep(TimeSpan.FromSeconds(UPDATE_SECONDS));
                 }
             });
+        }
+
+        private Task PopulateSPdictionary()
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                SPdictionary = facade.GetDataXMLBridge().StoPDictionary();
+            }).ContinueWith(_ => MessageBox.Show("Chart info loaded"));
         }
 
         // Starts new thread and
@@ -98,28 +107,31 @@ namespace HotBoxSoftware
             vwin.Show();
         }
 
-        private void TEST_Click(object sender, RoutedEventArgs e)
-        {
-            var test = facade.GetDBLogic().GetPointValuesForChart("P2", 180);
-        }
-
         private void Odpen_PickChartInfoWindow_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             var chartinfowin = new PickChartInfoWindow(DataGridwriteableModule.SelectedItem as HotBoxValues);
             chartinfowin.Show();
 
         }
-
+        
         private void Open_ValueChartWindow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             int minutes = Convert.ToInt32(Minutes_TextBox.Text);
-            var chartwin = new ValueChartWindow(DataGridwriteableModule.SelectedItem as HotBoxValues, minutes);
+            var spoint = (DataGridwriteableModule.SelectedItem as HotBoxValues).Module;
+            var ppoint = SPdictionary[spoint];
+            if (ppoint == null)
+                ppoint = "";
+            var chartwin = new ValueChartWindow(ppoint, minutes);
             chartwin.Show();
         }
         private void Second_Open_ValueChartWindow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             int minutes = Convert.ToInt32(Minutes_TextBox.Text);
-            var chartwin = new ValueChartWindow(moduleDataGrid.SelectedItem as HotBoxValues, minutes);
+            var spoint = (moduleDataGrid.SelectedItem as HotBoxValues).Module;
+            var ppoint = SPdictionary[spoint];
+            if (ppoint == null)
+                ppoint = "";
+            var chartwin = new ValueChartWindow(ppoint, minutes);
             chartwin.Show();
         }
 

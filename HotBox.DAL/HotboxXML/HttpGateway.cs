@@ -48,20 +48,22 @@ namespace HotBox.DAL.HotboxXML
             }
         }
 
-        public HttpResponseMessage GetPtoS(string p)
+        
+
+
+        public HttpResponseMessage GetPtoS(string P)
         {
-            using(var client = new HttpClient())
+            using (var client = new HttpClient())
             {
                 try
                 {
                     HttpResponseMessage response =
-                        client.GetAsync(PtoS(p)).Result;
+                        client.GetAsync(PtoS(P)).Result;
                     return response;
                 }
                 catch { return null; }
             }
         }
-
         public HttpResponseMessage GetWriteableHotBoxXML()
         {
             using (var client = new HttpClient())

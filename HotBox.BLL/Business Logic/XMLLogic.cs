@@ -1,4 +1,5 @@
 ﻿using HotBox.BLL.Business_Entities.ViewModels;
+using HotBox.BLL.Business_Entities.ViewModels.HotBox.BLL.Business_Entities.ViewModels;
 using HotBox.DAL.HotboxXML;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,7 @@ namespace HotBox.BLL.Business_Logic
         }
 
         // Returns the Module List<> of a HotBox object
-        public List<Module> GetModules(Hotbox hbdata)
+        public List<DAL.HotboxXML.Module> GetModules(Hotbox hbdata)
         {
             return hbdata==null ? null : hbdata.Site.Lan.Device.Modules;
         }
@@ -92,6 +93,17 @@ namespace HotBox.BLL.Business_Logic
                 var serializedhotbox = serializer.Deserialize(response.Content.ReadAsStreamAsync().Result);
                 Hotbox hotbox = (Hotbox)serializedhotbox;
                 return hotbox;
+            }
+            catch { return null; }
+        }
+        public SValue XMLSerializeSValue(HttpResponseMessage response)
+        {
+            try
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(SValue));
+                var serializedsvalue = serializer.Deserialize(response.Content.ReadAsStreamAsync().Result);
+                SValue svalue = (SValue)serializedsvalue;
+                return svalue;
             }
             catch { return null; }
         }

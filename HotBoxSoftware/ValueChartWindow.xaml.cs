@@ -35,12 +35,10 @@ namespace HotBoxSoftware
         readonly int AXIS_POINT_LINE_LENGTH = 4;
         double pointLineMarginLeft;
         double pointLineMarginTop;
-        public ValueChartWindow(HotBoxValues hbvalues, int minutes)
+        public ValueChartWindow(string pointname, int minutes)
         {
             InitializeComponent();
-            this.pointName = hbvalues.Module;
-            // DELETE NEXT LINE WHEN FIXED
-            pointName = "P2";
+            this.pointName = pointname;
             this.minutes = minutes;
 
             xLength = xLine.Points[1].X;
@@ -59,7 +57,7 @@ namespace HotBoxSoftware
                 ValueChart.Points = pointvalues.PointCollection;
                 yDivisor = pointvalues.yDivisor;
                 xDivisor = pointvalues.xDivisor;
-                Unit_TextBlock.Text = hbvalues.Unit;
+                //Unit_TextBlock.Text = hbvalues.Unit;
                 //SetChartPoints();
                 GenerateChart();
             }
