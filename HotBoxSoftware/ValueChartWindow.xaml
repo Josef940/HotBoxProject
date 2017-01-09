@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HotBoxSoftware"
         mc:Ignorable="d"
-        Title="ValueChartWindow" Height="500" Width="1000">
+        Title="Hotbox Chart" Height="500" Width="1000"
+        Icon="favicon.ico">
     <Viewbox StretchDirection="Both" Stretch="Fill">
         <Canvas Height="150" Width="400" Name="myCanvas">
             <TextBlock FontSize="8"  Name="Unit_TextBlock" FontStyle="Italic" Margin="10"/>

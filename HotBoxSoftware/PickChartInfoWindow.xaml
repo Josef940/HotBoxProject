@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HotBoxSoftware"
         mc:Ignorable="d"
-        Title="PickChartInfoWindow" Height="300" Width="450"
-        ResizeMode="NoResize">
+        Title="Hotbox Chart" Height="300" Width="450"
+        ResizeMode="NoResize"
+        Icon="favicon.ico">
     <Viewbox>
         <Grid>
             <StackPanel>

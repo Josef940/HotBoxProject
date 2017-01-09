@@ -5,14 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HotBoxSoftware"
         mc:Ignorable="d"
-        Title="MainWindow" Height="Auto" 
-        Width="Auto">
+        Title="Hotbox Software" Height="Auto" 
+        Width="Auto"
+        Icon="favicon.ico">
     <Viewbox StretchDirection="DownOnly">
-    <DockPanel Name="mainGrid">
-        <StackPanel Name="mainGrid2" >
-            <TextBlock Name="TextBlockError" Foreground="Red" Margin="10" FontWeight="Bold" FontSize="16" Visibility="Hidden">
+        <DockPanel Name="mainGrid">
+            <StackPanel Name="mainGrid2" >
+                <TextBlock Name="TextBlockError" Foreground="Red" Margin="10" FontWeight="Bold" FontSize="16" Visibility="Hidden">
             Error updating values!
-            </TextBlock>
+                </TextBlock>
                 <TextBlock Name="TextBlockLoading" Margin="10" FontSize="14" Visibility="Hidden">
                 Loading...
                 </TextBlock>
@@ -20,14 +21,15 @@
                 <TextBox FontSize="16" FontWeight="Bold" VerticalAlignment="Bottom" Name="Minutes_TextBox" TextChanged="Minutes_TextBox_TextChanged" TextAlignment="Center" Text="0"/>
                 <TextBlock FontSize="16" >minutes ago to now</TextBlock>
                 <TextBlock Name="Time_TextBlock"/>
+                <TextBlock Name="Chart_TextBlock" FontWeight="Bold" Foreground="Blue" FontSize="15" Margin="0,12,0,0">Loading chart information...</TextBlock>
             </StackPanel>
-        <DataGrid Name="moduleDataGrid" IsReadOnly="True" FontSize="16" AlternationCount="2" RowStyle="{StaticResource CustomRowStyle}"
+            <DataGrid Name="moduleDataGrid" IsReadOnly="True" FontSize="16" AlternationCount="2" RowStyle="{StaticResource CustomRowStyle}"
                  MouseDoubleClick="Second_Open_ValueChartWindow_MouseDoubleClick" Style="{StaticResource CustomDataGrid}"/>
 
             <!--MouseDoubleClick="OpenValueWindow_MouseDoubleClick"-->
             <StackPanel>
-            <DataGrid Name="DataGridwriteableModule" IsReadOnly="True" FontSize="16" 
-                MouseDoubleClick="Open_ValueChartWindow_MouseDoubleClick"  Style="{StaticResource CustomDataGrid}" RowStyle="{StaticResource CustomRowStyle}" AlternationCount="2"/>
+                <DataGrid Name="DataGridwriteableModule" IsReadOnly="True" FontSize="16" 
+                 Style="{StaticResource CustomDataGrid}" RowStyle="{StaticResource CustomRowStyle}" AlternationCount="2"/>
                 <Button Click="SetValue_Click" FontSize="18" Margin="0,10,0,0" HorizontalAlignment="Stretch">Set value</Button>
             </StackPanel>
         </DockPanel>

@@ -39,7 +39,7 @@ namespace HotBoxSoftware
             moduleDataGrid.ItemsSource = hotboxValues;
             DataGridwriteableModule.ItemsSource = writeablehotboxValues;
             UpdateDataGridLoop();
-            Time_TextBlock.Text = "("+facade.GetViewLogic().MinutesToTimeText(Convert.ToInt32(0))+")";
+            Time_TextBlock.Text = "(" + facade.GetViewLogic().MinutesToTimeText(Convert.ToInt32(0)) + ")";
         }
 
         private Task UpdateDataGridLoop()
@@ -67,7 +67,29 @@ namespace HotBoxSoftware
             return Task.Factory.StartNew(() =>
             {
                 SPdictionary = facade.GetDataXMLBridge().StoPDictionary();
-            }).ContinueWith(_ => MessageBox.Show("Chart info loaded"));
+            }).ContinueWith(_ =>
+            {
+                if (SPdictionary == null)
+                    InvokeDispatcher(() => DictionaryFailed());
+                else
+                {
+                    InvokeDispatcher(() => DictionarySucceeded());
+                    Thread.Sleep(TimeSpan.FromSeconds(5));
+                    InvokeDispatcher(() => Chart_TextBlock.Visibility = Visibility.Hidden);
+                }
+            });
+        }
+
+        private void DictionarySucceeded()
+        {
+            Chart_TextBlock.Foreground = new SolidColorBrush(Colors.Green);
+            Chart_TextBlock.Text = "Charts can now be accessed";
+        }
+
+        private void DictionaryFailed()
+        {
+            Chart_TextBlock.Foreground = new SolidColorBrush(Colors.Red);
+            Chart_TextBlock.Text = "Failed loading chart information!";
         }
 
         // Starts new thread and
@@ -113,26 +135,36 @@ namespace HotBoxSoftware
             chartinfowin.Show();
 
         }
-        
+        /*
         private void Open_ValueChartWindow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            int minutes = Convert.ToInt32(Minutes_TextBox.Text);
-            var spoint = (DataGridwriteableModule.SelectedItem as HotBoxValues).Module;
-            var ppoint = SPdictionary[spoint];
-            if (ppoint == null)
-                ppoint = "";
-            var chartwin = new ValueChartWindow(ppoint, minutes);
-            chartwin.Show();
-        }
+            if (SPdictionary == null)
+            {
+                int minutes = Convert.ToInt32(Minutes_TextBox.Text);
+                var spoint = (DataGridwriteableModule.SelectedItem as HotBoxValues).Module;
+                string ppoint;
+                if (SPdictionary.ContainsKey(spoint))
+                    ppoint = SPdictionary[spoint];
+                else
+                    ppoint = "";
+                var chartwin = new ValueChartWindow(ppoint, minutes);
+                chartwin.Show();
+            }
+        }*/
         private void Second_Open_ValueChartWindow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            int minutes = Convert.ToInt32(Minutes_TextBox.Text);
-            var spoint = (moduleDataGrid.SelectedItem as HotBoxValues).Module;
-            var ppoint = SPdictionary[spoint];
-            if (ppoint == null)
-                ppoint = "";
-            var chartwin = new ValueChartWindow(ppoint, minutes);
-            chartwin.Show();
+            if (SPdictionary != null)
+            {
+                int minutes = Convert.ToInt32(Minutes_TextBox.Text);
+                var spoint = (moduleDataGrid.SelectedItem as HotBoxValues).Module;
+                string ppoint;
+                if (SPdictionary.ContainsKey(spoint))
+                    ppoint = SPdictionary[spoint];
+                else
+                    ppoint = "";
+                var chartwin = new ValueChartWindow(ppoint, minutes);
+                chartwin.Show();
+            }
         }
 
         private void SetValue_Click(object sender, RoutedEventArgs e)
@@ -150,7 +182,7 @@ namespace HotBoxSoftware
             Minutes_TextBox.Text = validInteger;
             Minutes_TextBox.SelectionStart = Minutes_TextBox.Text.Length;
             if (Time_TextBlock != null)
-                Time_TextBlock.Text = "("+facade.GetViewLogic().MinutesToTimeText(Convert.ToInt32(validInteger))+")";
+                Time_TextBlock.Text = "(" + facade.GetViewLogic().MinutesToTimeText(Convert.ToInt32(validInteger)) + ")";
         }
     }
 }

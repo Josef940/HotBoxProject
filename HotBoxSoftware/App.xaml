@@ -61,9 +61,13 @@
             <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
             <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
             <Setter Property="AlternationCount" Value="2"/>
+            <Setter Property="ColumnHeaderStyle" Value="{DynamicResource CustomHeaderStyle}"/>
         </Style>
 
-
+        <Style x:Key="CustomHeaderStyle" TargetType="DataGridColumnHeader">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
 
         <Style x:Key="CustomRowStyle" TargetType="DataGridRow">
             <Setter Property="Background" Value="GhostWhite"/>

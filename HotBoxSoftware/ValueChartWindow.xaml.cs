@@ -72,55 +72,6 @@ namespace HotBoxSoftware
 
         private void GenerateChart()
         {
-            //// Generates point-lines and numbers for the y-axis above 0
-            //for (int i = 0; i < (yLength - yLengthInMinus) / YUNIT; i++)
-            //{
-            //    var tb = new TextBlock();
-            //    tb.FontSize = 6;
-            //    tb.Text = Convert.ToString((yPositive - i * (yPositive / YUNIT)) * yDivisor);
-            //    tb.Margin = new Thickness(pointLineMarginLeft - 15, pointLineMarginTop + 15.5 + i * (yPositive / YUNIT) - yLengthInMinus, 0, 0);
-            //    myCanvas.Children.Add(tb);
-
-            //    var yPointLine = new Polyline();
-            //    yPointLine.Margin = new Thickness(xLine.Margin.Left, xLine.Margin.Top, 0, 0);
-            //    yPointLine.Stroke = new SolidColorBrush(Colors.Black);
-            //    yPointLine.Points = new PointCollection { new Point(-AXIS_POINT_LINE_LENGTH, i * YUNIT), new Point(AXIS_POINT_LINE_LENGTH, i * YUNIT) };
-            //    myCanvas.Children.Add(yPointLine);
-            //}
-            //// Generates point-lines and numbers for the y-axis below 0
-            //for (int i = 1; i < (yLengthInMinus / YUNIT) + 1; i++)
-            //{
-            //    var tb = new TextBlock();
-            //    tb.FontSize = 6;
-            //    tb.Text = Convert.ToString((-i * (yPositive / YUNIT)) * yDivisor);
-            //    tb.Margin = new Thickness(pointLineMarginLeft - 15, pointLineMarginTop - 4.5 + i * YUNIT + yPositive, 0, 0);
-            //    myCanvas.Children.Add(tb);
-
-            //    var yPointLine = new Polyline();
-            //    yPointLine.Margin = new Thickness(xLine.Margin.Left, xLine.Margin.Top, 0, 0);
-            //    yPointLine.Stroke = new SolidColorBrush(Colors.Black);
-            //    yPointLine.Points = new PointCollection { new Point(-AXIS_POINT_LINE_LENGTH, i * YUNIT + yPositive), new Point(AXIS_POINT_LINE_LENGTH, i * YUNIT + yPositive) };
-            //    myCanvas.Children.Add(yPointLine);
-            //}
-            //// Generates point-lines and numbers for the x-axis
-            //for (int i = 1; i < (xLength / XUNIT) + 1; i++)
-            //{
-            //    if (i % 2 != 0)
-            //    {
-            //        var tb = new TextBlock();
-            //        tb.FontSize = 6;
-            //        tb.Text = Convert.ToString((i * XUNIT) * xDivisor);
-            //        tb.Margin = new Thickness(i * XUNIT + pointLineMarginLeft - 5, pointLineMarginTop + yPositive + 5, 0, 0);
-            //        myCanvas.Children.Add(tb);
-            //    }
-
-            //    var xPointLine = new Polyline();
-            //    xPointLine.Margin = new Thickness(xLine.Margin.Left, xLine.Margin.Top, 0, 0);
-            //    xPointLine.Stroke = new SolidColorBrush(Colors.Black);
-            //    xPointLine.Points = new PointCollection { new Point(i * XUNIT, -AXIS_POINT_LINE_LENGTH + yPositive), new Point(i * XUNIT, AXIS_POINT_LINE_LENGTH + yPositive) };
-            //    myCanvas.Children.Add(xPointLine);
-            //}
-
             GeneratePointsYAxisAboveZero();
             GeneratePointsYAxisBelowZero();
             GeneratePointsXAxis();

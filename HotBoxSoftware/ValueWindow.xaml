@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HotBoxSoftware"
         mc:Ignorable="d"
-        Title="ValueWindow" Height="200" Width="300"
+        Title="Hotbox Value Change" Height="200" Width="300"
         ResizeMode="CanMinimize">
     <Viewbox StretchDirection="DownOnly">
     <Grid>
