@@ -13,21 +13,21 @@ namespace HotBox.DAL.HotboxXML
         private const string KEY = "FF3F390D";
         private const string IP = "10.176.131.250";
         // FOR DEVELOPMENT OUTSIDE SCHOOL --------------
-        private string HotBoxReadURI = "http://norrelundparken.se-bb.dk/ws/tsite.xml?Type=Read&Key=ABCDEF&Request=S100-200(V,%25,$)";
-        private string WriteableHotBoxReadURI = "http://norrelundparken.se-bb.dk/ws/tsite.xml?Type=Read&Request=K1-300(V,%25,$)";
-        private string HotBoxWriteURI(string modulename, string value)
-        {
-            return String.Format("http://10.176.131.250/ws/tsite.xml?Type=Write&Key=FF3F390D&Request={0}(V={1})", modulename, value);
-        }
+        //private string HotBoxReadURI = "http://norrelundparken.se-bb.dk/ws/tsite.xml?Type=Read&Key=ABCDEF&Request=S100-200(V,%25,$)";
+        //private string WriteableHotBoxReadURI = "http://norrelundparken.se-bb.dk/ws/tsite.xml?Type=Read&Request=K1-300(V,%25,$)";
+        //private string HotBoxWriteURI(string modulename, string value)
+        //{
+        //    return String.Format("http://10.176.131.250/ws/tsite.xml?Type=Write&Key=FF3F390D&Request={0}(V={1})", modulename, value);
+        //}
         // ---------------------------------------------
 
         // REAL HOTBOX:
-        //private string HotBoxReadURI = "http://10.176.131.250/ws/tsite.xml?Type=Read&Request=S1-300(V,%25,$)";
-        //private string WriteableHotBoxReadURI = "http://10.176.131.250/ws/tsite.xml?Type=Read&Request=K1-300(V,%25,$)";
-        //private string HotBoxWriteURI(string modulename, string value)
-        //{
-        //    return String.Format("http://10.176.131.250/ws/tsite.xml?Type=Write&Key={0}&Request={1}(V={2})", KEY, modulename, value);
-        //}
+        private string HotBoxReadURI = "http://10.176.131.250/ws/tsite.xml?Type=Read&Request=S1-300(V,%25,$)";
+        private string WriteableHotBoxReadURI = "http://10.176.131.250/ws/tsite.xml?Type=Read&Request=K1-300(V,%25,$)";
+        private string HotBoxWriteURI(string modulename, string value)
+        {
+            return String.Format("http://10.176.131.250/ws/tsite.xml?Type=Write&Key={0}&Request={1}(V={2})", KEY, modulename, value);
+        }
         // ----------------------------
         private string PtoS(string p)
         {
