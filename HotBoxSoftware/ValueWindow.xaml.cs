@@ -47,7 +47,7 @@ namespace HotBoxSoftware
                     MessageBox.Show("An error has occurred! Could not set value");
             }
             else
-                MessageBox.Show("Not a valid  number");
+                MessageBox.Show("Not a valid number");
         }
     }
 }

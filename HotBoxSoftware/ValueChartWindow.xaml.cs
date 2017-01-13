@@ -35,12 +35,16 @@ namespace HotBoxSoftware
         readonly int AXIS_POINT_LINE_LENGTH = 4;
         double pointLineMarginLeft;
         double pointLineMarginTop;
-        public ValueChartWindow(string pointname, int minutes)
+        public ValueChartWindow(string pointname, int minutes, HotBoxValues hotbox)
         {
             InitializeComponent();
             this.pointName = pointname;
             this.minutes = minutes;
-
+            if(hotbox != null)
+            {
+                Unit_TextBlock.Text = hotbox.Unit;
+                Label_TextBlock.Text = hotbox.Label;
+            }
             xLength = xLine.Points[1].X;
             yLength = yLine.Points[1].Y;
 

@@ -10,6 +10,7 @@
     <Viewbox StretchDirection="Both" Stretch="Fill">
         <Canvas Height="150" Width="400" Name="myCanvas">
             <TextBlock FontSize="8"  Name="Unit_TextBlock" FontStyle="Italic" Margin="10"/>
+            <TextBlock FontSize="10" FontWeight="Bold"  Name="Label_TextBlock" FontStyle="Italic" Margin="150,7,0,0"/>
             <TextBlock Visibility="Hidden" Name="NoValues_Textblock" Margin="50">No values were found</TextBlock>
             <Polyline Name="yLine" Style="{StaticResource yChartStyle}"/>
             <Polyline Name="xLine" Style="{StaticResource xChartStyle}"></Polyline>

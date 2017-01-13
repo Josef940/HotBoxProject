@@ -156,13 +156,14 @@ namespace HotBoxSoftware
             if (SPdictionary != null)
             {
                 int minutes = Convert.ToInt32(Minutes_TextBox.Text);
-                var spoint = (moduleDataGrid.SelectedItem as HotBoxValues).Module;
+                var hotboxvalue = (moduleDataGrid.SelectedItem as HotBoxValues);
+                var spoint = hotboxvalue.Module;
                 string ppoint;
                 if (SPdictionary.ContainsKey(spoint))
                     ppoint = SPdictionary[spoint];
                 else
                     ppoint = "";
-                var chartwin = new ValueChartWindow(ppoint, minutes);
+                var chartwin = new ValueChartWindow(ppoint, minutes,hotboxvalue);
                 chartwin.Show();
             }
         }
